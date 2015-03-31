@@ -1,0 +1,27 @@
+E:\VS安装\Project\Moocnote\Moocnote\bin\Debug\Moocnote.exe.config
+E:\VS安装\Project\Moocnote\Moocnote\bin\Debug\Moocnote.exe
+E:\VS安装\Project\Moocnote\Moocnote\bin\Debug\Moocnote.pdb
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\Moocnote.csprojResolveAssemblyReference.cache
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\App.g.cs
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\Moocnote_MarkupCompile.cache
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\Moocnote.g.resources
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\Moocnote.Properties.Resources.resources
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\Moocnote.csproj.GenerateResource.Cache
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\Moocnote.exe
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\Moocnote.pdb
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\Moocnote_Content.g.cs
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\VideoPage.baml
+E:\VS安装\Project\Moocnote\Moocnote\obj\Debug\VideoPage.g.cs
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\bin\Debug\Moocnote.exe.config
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\bin\Debug\Moocnote.exe
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\bin\Debug\Moocnote.pdb
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\VideoPage.baml
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\VideoPage.g.cs
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\App.g.cs
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote_MarkupCompile.cache
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.g.resources
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.Properties.Resources.resources
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.csproj.GenerateResource.Cache
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.exe
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.pdb
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.csprojResolveAssemblyReference.cache

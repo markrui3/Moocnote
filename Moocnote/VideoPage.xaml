@@ -1,0 +1,86 @@
+﻿<Page x:Class="Moocnote.VideoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+    Title="VideoPage" Width="500" Height="550">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="btnStyle" TargetType="Button">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="White"/>
+                            <GradientStop Offset="0.5" Color="#FF554D4A"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontStyle" Value="Italic"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Width" Value="65"/>
+                <Setter Property="Foreground" Value="GreenYellow"/>
+                <Style.Triggers>
+                    <Trigger Property="Button.IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <StackPanel HorizontalAlignment="Center" Margin="20">
+            <Border BorderThickness="3" Background="Black">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="White"/>
+                        <GradientStop Offset="0.5" Color="Gray"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <MediaElement Height="300" Width="450" MediaEnded="mediaElement_MediaEnded" Name="mediaElement" MediaOpened="mediaElement_MediaOpened" Volume="{Binding ElementName=volumeSlider, Path=Value}"
+                       UnloadedBehavior="Stop" Stretch="Fill" LoadedBehavior="Manual"
+/>
+            </Border>
+            
+           <Slider Name="timelineSlider" Margin="5" Width="450" 
+        HorizontalAlignment="Center" />
+            
+            <TextBlock Width="110" x:Name="txtTime"/>
+            <TextBlock Width="96" x:Name="totalTime" />
+            <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
+                <Button x:Name="openBtn" Content="选择视频" 
+                Style="{StaticResource btnStyle}" Click="openBtn_Click"/>
+                <Button x:Name="playBtn" Content="播放" 
+                Style="{StaticResource btnStyle}" Click="playBtn_Click"/>
+                <Button x:Name="pauseBtn" Content="暂停" 
+                Style="{StaticResource btnStyle}" Click="pauseBtn_Click"/>
+                <Button x:Name="stopBtn" Content="停止" 
+                Style="{StaticResource btnStyle}" Click="stopBtn_Click"/>
+                <Button x:Name="backBtn" Content="后退" 
+                Style="{StaticResource btnStyle}" Click="backBtn_Click"/>
+                <Button x:Name="forwardBtn" Content="前进" 
+                Style="{StaticResource btnStyle}" Click="forwardBtn_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3" Width="450">
+                <TextBlock Text="音量:" Foreground="Black" Margin="3" VerticalAlignment="Center"/>
+                <Slider x:Name="volumeSlider" Minimum="0" VerticalAlignment="Center" Maximum="1" Value="0.5" Width="150" Margin="3"/>
+
+                <Button x:Name="muteBtn" Content="静音" 
+                 Click="muteBtn_Click"/>
+
+                <TextBlock Text="时间:" VerticalAlignment="Center"/>
+                <TextBox Height="23" Name="textBox1" Width="30"/>
+                <TextBlock Text="秒" VerticalAlignment="Center"/>
+
+                <Button x:Name="skipBtn" Content="跳转" 
+                 Click="skipBtn_Click"/>
+                <!--
+ <telerik:RadButton Height="23" Name="radButton1" Width="45" Margin="10"  Click="radButton1_Click">跳转</telerik:RadButton>
+                <telerik:RadButton Height="23" Name="radButton2" Width="45" Click="radButton2_Click">截屏</telerik:RadButton>
+                <telerik:RadButton Height="23" Name="radButton3" Width="45" Margin="10" Click="radButton3_Click" >静音</telerik:RadButton>
+                -->
+                </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Page>
