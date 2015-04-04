@@ -28,6 +28,7 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 
+#runtime cache
 Moocnote.sln
 Moocnote/bin
 Moocnote/obj
