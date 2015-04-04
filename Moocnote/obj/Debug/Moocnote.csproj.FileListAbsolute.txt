@@ -25,3 +25,4 @@ D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\o
 D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.exe
 D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.pdb
 D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\obj\Debug\Moocnote.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\Microsoft Visual Studio 12.0\Projects\Moocnote\Moocnote\bin\Debug\mysql.data.dll

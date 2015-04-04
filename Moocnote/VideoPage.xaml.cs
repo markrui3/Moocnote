@@ -15,7 +15,9 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Windows.Threading;
-
+using Moocnote.Utils;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace Moocnote
 {
@@ -40,11 +42,22 @@ namespace Moocnote
             SetPlayer(false);
 
             this.Loaded += new RoutedEventHandler(Page_Loaded);
-            
+
             mediaElement.MediaOpened += new RoutedEventHandler(mediaElement_MediaOpened);
             mediaElement.MediaEnded += new RoutedEventHandler(mediaElement_MediaEnded);
-            
 
+            DBConnection db = new DBConnection();
+            MySqlDataReader reader = db.executeQuery("select * from alldata where id=1");
+            if (reader != null)
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        //System.Windows.Forms.MessageBox.Show(reader.GetInt32(0) + " " + reader.GetString(1));
+                    }
+                }
+            }
 
             /*
            * 进度时间设置2
@@ -62,8 +75,8 @@ namespace Moocnote
         #region 选择视频文件对话框
         private void openBtn_Click(object sender, RoutedEventArgs e)
         {
-           
-            
+
+
             string filepath = "";
             //弹出打开文件对话框
             OpenFileDialog openDialog = new OpenFileDialog();
@@ -91,7 +104,7 @@ namespace Moocnote
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             timelineSlider.ValueChanged += timelineSlider_ValueChanged;
-            
+
 
         }
 
@@ -187,7 +200,7 @@ namespace Moocnote
         {
             mediaElement.Position = mediaElement.Position + TimeSpan.FromSeconds(10);
         }
-         
+
         #region 跳转到指定秒数播放视频
         private void skipBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -221,7 +234,7 @@ namespace Moocnote
             f.Show();
         }
         #endregion
-        *****************************/   
+        *****************************/
 
         #region 播放进度，跳转到播放的哪个地方
         private void timelineSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -237,13 +250,13 @@ namespace Moocnote
 
 
 
-        
+
 
 
 
         private void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
         {
-            
+
             timelineSlider.Minimum = 0;
             timelineSlider.Maximum = mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds;
             duration = mediaElement.NaturalDuration.HasTimeSpan ? mediaElement.NaturalDuration.TimeSpan : TimeSpan.FromMilliseconds(0);
@@ -252,7 +265,7 @@ namespace Moocnote
                  duration.Hours,
                  duration.Minutes,
                  duration.Seconds);
-    
+
             SetupTimer();
         }
 
@@ -283,7 +296,7 @@ namespace Moocnote
             timelineSlider.Value = 0;
         }
 
-        
+
         private void muteBtn_Click(object sender, RoutedEventArgs e)
         {
             // IsMuted - 是否静音
@@ -297,8 +310,8 @@ namespace Moocnote
                 muteBtn.Content = "有声";
                 mediaElement.IsMuted = true;
             }
-        } 
-          
+        }
+
 
     }
 }
