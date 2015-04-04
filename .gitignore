@@ -1,3 +1,8 @@
+# runtime cache
+/Moocnote.sln
+/Moocnote/bin/*
+/Moocnote/obj/*
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -27,11 +32,6 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
-
-#runtime cache
-/Moocnote.sln
-/Moocnote/bin/*
-/Moocnote/obj/*
 
 # Thumbnails
 ._*
