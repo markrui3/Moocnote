@@ -29,9 +29,9 @@ $RECYCLE.BIN/
 .LSOverride
 
 #runtime cache
-Moocnote.sln
-Moocnote/bin
-Moocnote/obj
+/Moocnote.sln
+/Moocnote/bin/*
+/Moocnote/obj/*
 
 # Thumbnails
 ._*
