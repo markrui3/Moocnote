@@ -47,6 +47,7 @@ namespace Moocnote
             mediaElement.MediaEnded += new RoutedEventHandler(mediaElement_MediaEnded);
 
             DBConnection db = new DBConnection();
+            db.executeUpdate("delete from traffic where id=3");
             MySqlDataReader reader = db.executeQuery("select * from alldata where id=1");
             if (reader != null)
             {

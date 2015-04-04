@@ -34,7 +34,6 @@ namespace Moocnote.Utils
             {
                 Console.WriteLine("插入/更新/删除成功");
             }
-            Conn.Close();
         }
 
         public MySqlDataReader executeQuery(String sql)
