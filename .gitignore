@@ -1,7 +1,7 @@
 # runtime cache
-/Moocnote.sln
-/Moocnote/bin/*
-/Moocnote/obj/*
+Moocnote.sln
+Moocnote/bin/*
+Moocnote/obj/*
 
 # Windows image file caches
 Thumbs.db
