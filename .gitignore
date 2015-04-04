@@ -28,6 +28,10 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 
+Moocnote.sln
+Moocnote/bin
+Moocnote/obj
+
 # Thumbnails
 ._*
 
