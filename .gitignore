@@ -1,5 +1,6 @@
 # runtime cache
-Moocnote.sln
+*.sln
+*.suo
 Moocnote/bin/*
 Moocnote/obj/*
 
