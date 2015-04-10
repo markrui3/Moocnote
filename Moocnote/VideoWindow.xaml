@@ -4,9 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-    Title="VideoWindow" Width="500" Height="550" WindowStartupLocation="CenterScreen">
+    Title="VideoWindow" Width="800" Height="550" WindowStartupLocation="CenterScreen">
     <Viewbox>
     <Grid>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width=" 500"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style x:Key="btnStyle" TargetType="Button">
                 <Setter Property="Background">
@@ -79,10 +83,13 @@
                 <telerik:RadButton Height="23" Name="radButton3" Width="45" Margin="10" Click="radButton3_Click" >静音</telerik:RadButton>
                 -->
                 </StackPanel>
-            <TextBox x:Name="noteTxt" Height="23" TextWrapping="Wrap" Width="120"/>
-            <Button x:Name="saveBtn" Content="保存" Width="75" Click="saveBtn_Click"/>
 
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+            <StackPanel  Grid.Row="0 " Grid.Column=" 1">
+                <TextBox x:Name="noteTxt" Height="23" TextWrapping="Wrap" Margin="170,0,10,0"/>
+                <Button x:Name="saveBtn" Content="保存" Click="saveBtn_Click" Margin="192.5,0,32.5,0"/>
+            </StackPanel>
+
+        </Grid>
    </Viewbox>
 </Window>
