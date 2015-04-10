@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -12,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Windows.Threading;
 using Moocnote.Utils;
@@ -22,9 +22,9 @@ using MySql.Data.MySqlClient;
 namespace Moocnote
 {
     /// <summary>
-    /// VideoPage.xaml 的交互逻辑
+    /// VideoWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class VideoPage : Page
+    public partial class VideoWindow : Window
     {
         /*
          * 进度时间设置1
@@ -41,12 +41,12 @@ namespace Moocnote
         //视频位置
         String filepath = "";
 
-        public VideoPage()
+        public VideoWindow()
         {
             InitializeComponent();
             SetPlayer(false);
 
-            this.Loaded += new RoutedEventHandler(Page_Loaded);
+            this.Loaded += new RoutedEventHandler(Window_Loaded);
 
             mediaElement.MediaOpened += new RoutedEventHandler(mediaElement_MediaOpened);
             mediaElement.MediaEnded += new RoutedEventHandler(mediaElement_MediaEnded);
@@ -72,7 +72,7 @@ namespace Moocnote
             OpenFileDialog openDialog = new OpenFileDialog();
             //openDialog.
             openDialog.Filter = @"视频文件|*.avi;*.wav;*.wmv;*.rm;*.rmvb;*.mkv;*.moc;*.asf;*.flv;*.mp4";
-            if (openDialog.ShowDialog() == DialogResult.Cancel)
+            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
             {
                 return;
             }
@@ -91,10 +91,17 @@ namespace Moocnote
 
         #endregion
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             timelineSlider.ValueChanged += timelineSlider_ValueChanged;
 
+            //窗口设置
+            this.WindowState = System.Windows.WindowState.Normal;
+            this.WindowStyle = System.Windows.WindowStyle.SingleBorderWindow;
+            this.ResizeMode = System.Windows.ResizeMode.CanResize;
+            //this.Left = 0.0.; this.Top = 0.0;
+            //this.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+            //this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
 
         }
 

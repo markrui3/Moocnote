@@ -82,8 +82,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utils\DBConnection.cs" />
-    <Compile Include="VideoPage.xaml.cs">
-      <DependentUpon>VideoPage.xaml</DependentUpon>
+    <Compile Include="VideoWindow.xaml.cs">
+      <DependentUpon>VideoWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -114,7 +114,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="VideoPage.xaml">
+    <Page Include="VideoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
