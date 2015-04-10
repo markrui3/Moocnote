@@ -80,7 +80,9 @@
                 <telerik:RadButton Height="23" Name="radButton3" Width="45" Margin="10" Click="radButton3_Click" >静音</telerik:RadButton>
                 -->
                 </StackPanel>
-            
+            <TextBox x:Name="noteTxt" Height="23" TextWrapping="Wrap" Width="120"/>
+            <Button x:Name="saveBtn" Content="保存" Width="75" Click="saveBtn_Click"/>
+
         </StackPanel>
     </Grid>
 </Page>

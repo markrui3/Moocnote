@@ -11,7 +11,7 @@ namespace Moocnote.Utils
     class DBConnection
     {
         //数据库连接字符串
-        public string ConnString = "Database='weibo';Data Source='localhost';User Id='root';Password='';charset='utf8';pooling=true;port=3306";
+        public string ConnString = "Database='moocnote';Data Source='localhost';User Id='root';Password='';charset='utf8';pooling=true;port=3306";
         public MySqlConnection Conn = null;
 
         public DBConnection(String connectString)

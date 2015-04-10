@@ -35,6 +35,11 @@ namespace Moocnote
        * 进度时间设置1
        */
         public Bitmap bmp = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);
+        //数据库操作对象实例化
+        DBConnection db = new DBConnection();
+
+        //视频位置
+        String filepath = "";
 
         public VideoPage()
         {
@@ -45,20 +50,6 @@ namespace Moocnote
 
             mediaElement.MediaOpened += new RoutedEventHandler(mediaElement_MediaOpened);
             mediaElement.MediaEnded += new RoutedEventHandler(mediaElement_MediaEnded);
-
-            DBConnection db = new DBConnection();
-            db.executeUpdate("delete from traffic where id=3");
-            MySqlDataReader reader = db.executeQuery("select * from alldata where id=1");
-            if (reader != null)
-            {
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        //System.Windows.Forms.MessageBox.Show(reader.GetInt32(0) + " " + reader.GetString(1));
-                    }
-                }
-            }
 
             /*
            * 进度时间设置2
@@ -77,8 +68,6 @@ namespace Moocnote
         private void openBtn_Click(object sender, RoutedEventArgs e)
         {
 
-
-            string filepath = "";
             //弹出打开文件对话框
             OpenFileDialog openDialog = new OpenFileDialog();
             //openDialog.
@@ -310,6 +299,28 @@ namespace Moocnote
             {
                 muteBtn.Content = "有声";
                 mediaElement.IsMuted = true;
+            }
+        }
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            String note = noteTxt.Text;
+            if (note != "" && filepath != "")
+            {
+                String sqlfilepath = filepath.Replace("\\", "\\\\");
+                db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + "," + mediaElement.Position.TotalMilliseconds + "," + "'" + note + "'" + "," + "'" + System.DateTime.Now + "'" + ")");
+                
+                //MySqlDataReader reader = db.executeQuery("select * from note where id=1");
+                //if (reader != null)
+                //{
+                //    while (reader.Read())
+                //    {
+                //        if (reader.HasRows)
+                //        {
+                //            //System.Windows.Forms.MessageBox.Show(reader.GetInt32(0) + " " + reader.GetString(1));
+                //        }
+                //    }
+                //}
             }
         }
 
