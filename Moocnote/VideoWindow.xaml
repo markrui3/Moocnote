@@ -103,19 +103,15 @@
                     </TextBlock>
                 </Canvas>
                 <TextBlock>时间   笔记    日期</TextBlock>
-                <ItemsControl >
+                <ItemsControl x:Name="noteItem" >
                     <ItemsControl.Template>
                         <ControlTemplate>
                             <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Height=" 450">
                                 <ItemsPresenter />
+                                
                             </ScrollViewer>
                         </ControlTemplate>
                     </ItemsControl.Template>
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock>ni</TextBlock>
-                        <TextBlock>hao</TextBlock>
-                        <TextBlock>a</TextBlock>
-                    </StackPanel>
                 </ItemsControl>
                 
 

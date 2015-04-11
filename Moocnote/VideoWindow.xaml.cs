@@ -86,7 +86,31 @@ namespace Moocnote
             playBtn.IsEnabled = true;
             //timer.Tick += new EventHandler(timer_Tick);
 
+            //显示notepanel信息
+            int line = 1;
+            while (line <= 50)
+            {
+                StackPanel notePanel = new StackPanel();
+                notePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                TextBlock tb1 = new TextBlock();
+                tb1.Text = "2015-07-03 12:00:00";
+                tb1.Width = 50;
 
+                TextBlock tb2 = new TextBlock();
+                tb2.Text = "nihao";
+                tb2.Width = 100;
+
+                TextBlock tb3 = new TextBlock();
+                tb3.Text = "2015-04-05 1:00:00";
+                tb3.Width = 50;
+
+                notePanel.Children.Add(tb1);
+                notePanel.Children.Add(tb2);
+                notePanel.Children.Add(tb3);
+
+                noteItem.Items.Add(notePanel);
+                line++;
+            }
         }
 
         #endregion
