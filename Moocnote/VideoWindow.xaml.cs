@@ -93,16 +93,16 @@ namespace Moocnote
                 StackPanel notePanel = new StackPanel();
                 notePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
                 TextBlock tb1 = new TextBlock();
-                tb1.Text = "2015-07-03 12:00:00";
-                tb1.Width = 50;
+                tb1.Text = "00:00";
+                tb1.Width = 60;
 
                 TextBlock tb2 = new TextBlock();
                 tb2.Text = "nihao";
-                tb2.Width = 100;
+                tb2.Width = 160;
 
                 TextBlock tb3 = new TextBlock();
-                tb3.Text = "2015-04-05 1:00:00";
-                tb3.Width = 50;
+                tb3.Text = "2015-04-05";
+                tb3.Width = 80;
 
                 notePanel.Children.Add(tb1);
                 notePanel.Children.Add(tb2);
@@ -111,6 +111,17 @@ namespace Moocnote
                 noteItem.Items.Add(notePanel);
                 line++;
             }
+            //MySqlDataReader reader = db.executeQuery("select * from note where id=1");
+            //if (reader != null)
+            //{
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            //System.Windows.Forms.MessageBox.Show(reader.GetInt32(0) + " " + reader.GetString(1));
+            //        }
+            //    }
+            //}
         }
 
         #endregion
