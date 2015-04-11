@@ -86,7 +86,40 @@
 
             </StackPanel>
             <StackPanel  Grid.Row="0 " Grid.Column=" 1">
-                <TextBox x:Name="noteTxt" Height="23" TextWrapping="Wrap" Margin="170,0,10,0"/>
+                
+                <Canvas x:Name="c1" Margin="2,25,2,2">
+                    <Canvas.Triggers>
+                        <EventTrigger RoutedEvent="Canvas.Loaded" >
+                            <BeginStoryboard>
+                                <Storyboard x:Name="animation" RepeatBehavior="Forever" >
+                                    <DoubleAnimation Storyboard.TargetName="ScrollingUp"                    
+                                             Storyboard.TargetProperty="(Canvas.Left)" From="1024" To="0" Duration="0:0:15"  />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Canvas.Triggers>
+                    <TextBlock x:Name="ScrollingUp" FontWeight="Bold" Foreground="Red"  FontSize="12" TextWrapping="Wrap" Height="113">
+                nihao
+                    </TextBlock>
+                </Canvas>
+                <TextBlock>时间   笔记    日期</TextBlock>
+                <ItemsControl >
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Height=" 450">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock>ni</TextBlock>
+                        <TextBlock>hao</TextBlock>
+                        <TextBlock>a</TextBlock>
+                    </StackPanel>
+                </ItemsControl>
+                
+
+                <TextBox x:Name="noteTxt" Height="23" TextWrapping="Wrap" Margin="170,0,10,0" TextChanged="noteTxt_TextChanged"/>
                 <Button x:Name="saveBtn" Content="保存" Click="saveBtn_Click" Margin="192.5,0,32.5,0"/>
             </StackPanel>
 

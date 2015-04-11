@@ -331,6 +331,11 @@ namespace Moocnote
             }
         }
 
+        private void noteTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
 
     }
 }
