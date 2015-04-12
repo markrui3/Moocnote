@@ -19,6 +19,7 @@ using Moocnote.Utils;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
+
 namespace Moocnote
 {
     /// <summary>
@@ -87,41 +88,41 @@ namespace Moocnote
             //timer.Tick += new EventHandler(timer_Tick);
 
             //显示notepanel信息
-            int line = 1;
-            while (line <= 50)
+           
+
+                
+            
+
+            String sqlfilepath = filepath.Replace("\\", "\\\\");
+            MySqlDataReader reader = db.executeQuery("select * from note where videoaddr='"+sqlfilepath +"';");
+            if (reader != null)
             {
-                StackPanel notePanel = new StackPanel();
-                notePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                TextBlock tb1 = new TextBlock();
-                tb1.Text = "00:00";
-                tb1.Width = 60;
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        StackPanel notePanel = new StackPanel();
+                        notePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                        TextBlock tb1 = new TextBlock();
+                        TextBlock tb2 = new TextBlock();
+                        TextBlock tb3 = new TextBlock();
+                        tb1.Width = 60;
+                        tb2.Width = 180;
+                        tb3.Width = 95;
 
-                TextBlock tb2 = new TextBlock();
-                tb2.Text = "nihao";
-                tb2.Width = 160;
-
-                TextBlock tb3 = new TextBlock();
-                tb3.Text = "2015-04-05";
-                tb3.Width = 80;
-
-                notePanel.Children.Add(tb1);
-                notePanel.Children.Add(tb2);
-                notePanel.Children.Add(tb3);
-
-                noteItem.Items.Add(notePanel);
-                line++;
+                        tb1.Text = reader.GetString(2);
+                        tb2.Text = reader.GetString(3);
+                        tb3.Text = reader.GetString(4);
+                        
+                        notePanel.Children.Add(tb1);
+                        notePanel.Children.Add(tb2);
+                        notePanel.Children.Add(tb3);
+                        
+                        noteItem.Items.Add(notePanel);
+                        //system.windows.forms.messagebox.show(reader.getint32(0) + " " + reader.getstring(1));
+                    }
+                }
             }
-            //MySqlDataReader reader = db.executeQuery("select * from note where id=1");
-            //if (reader != null)
-            //{
-            //    while (reader.Read())
-            //    {
-            //        if (reader.HasRows)
-            //        {
-            //            //System.Windows.Forms.MessageBox.Show(reader.GetInt32(0) + " " + reader.GetString(1));
-            //        }
-            //    }
-            //}
         }
 
         #endregion
