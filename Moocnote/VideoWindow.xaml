@@ -102,13 +102,13 @@
                     <ItemsControl x:Name="noteItem" Height="208" >
                     <ItemsControl.Template>
                         <ControlTemplate>
-                            <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Height=" 250">
-                                <ItemsPresenter />
-
-                            </ScrollViewer>
+                            <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Height=" 208">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
                         </ControlTemplate>
                     </ItemsControl.Template>
-                </ItemsControl>
+                        
+                    </ItemsControl>
                     </Border> 
 
                 <Border Style="{StaticResource notCalledBorder}">

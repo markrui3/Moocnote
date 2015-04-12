@@ -87,16 +87,21 @@ namespace Moocnote
             playBtn.IsEnabled = true;
             //timer.Tick += new EventHandler(timer_Tick);
 
-            //显示notepanel信息
+            setNote_List();
            
+        }
 
-                
-            
+        #endregion
 
+
+    private void setNote_List()
+        {
+            //刷新notepanel信息
             String sqlfilepath = filepath.Replace("\\", "\\\\");
-            MySqlDataReader reader = db.executeQuery("select * from note where videoaddr='"+sqlfilepath +"';");
+            MySqlDataReader reader = db.executeQuery("select * from note where videoaddr='" + sqlfilepath + "';");
             if (reader != null)
             {
+                noteItem.Items.Clear();
                 while (reader.Read())
                 {
                     if (reader.HasRows)
@@ -110,7 +115,7 @@ namespace Moocnote
                         tb2.Width = 180;
                         tb3.Width = 95;
 
-                        
+
                         //int m = int.Parse(reader.GetString(2)) / 60000;
                         //int s = int.Parse(reader.GetString(2)) / 1000-m*60;
                         //string minute = Convert.ToString(m);
@@ -119,11 +124,12 @@ namespace Moocnote
                         tb1.Text = reader.GetString(2);
                         tb2.Text = reader.GetString(3);
                         tb3.Text = reader.GetString(4);
-                        
+
                         notePanel.Children.Add(tb1);
                         notePanel.Children.Add(tb2);
                         notePanel.Children.Add(tb3);
-                        
+
+                
                         noteItem.Items.Add(notePanel);
                         //system.windows.forms.messagebox.show(reader.getint32(0) + " " + reader.getstring(1));
                     }
@@ -132,7 +138,7 @@ namespace Moocnote
             reader.Close();
         }
 
-        #endregion
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -361,7 +367,7 @@ namespace Moocnote
                 string a = mediaElement.Position.ToString();
                 string b = a.Substring(0, 8);//获取当前视频的时间
                 db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + ",'" + b+ "'," + "'" + note + "'" + "," + "'" + System.DateTime.Now + "'" + ")");
-                
+                setNote_List();
                 //MySqlDataReader reader = db.executeQuery("select * from note where id=1");
                 //if (reader != null)
                 //{
