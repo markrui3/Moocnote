@@ -98,7 +98,7 @@ namespace Moocnote
         {
             //刷新notepanel信息
             String sqlfilepath = filepath.Replace("\\", "\\\\");
-            MySqlDataReader reader = db.executeQuery("select * from note where videoaddr='" + sqlfilepath + "';");
+            MySqlDataReader reader = db.executeQuery("select * from note where videoaddr='" + sqlfilepath + "' order by videotime;");
             if (reader != null)
             {
                 noteItem.Items.Clear();
