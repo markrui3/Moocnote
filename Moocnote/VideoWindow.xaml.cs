@@ -110,6 +110,12 @@ namespace Moocnote
                         tb2.Width = 180;
                         tb3.Width = 95;
 
+                        
+                        //int m = int.Parse(reader.GetString(2)) / 60000;
+                        //int s = int.Parse(reader.GetString(2)) / 1000-m*60;
+                        //string minute = Convert.ToString(m);
+                        //string second = Convert.ToString(s);
+                        //tb1.Text = string.Format ("{0:mm}:{1:ss}",minute ,second );
                         tb1.Text = reader.GetString(2);
                         tb2.Text = reader.GetString(3);
                         tb3.Text = reader.GetString(4);
@@ -352,7 +358,9 @@ namespace Moocnote
             if (note != "" && filepath != "")
             {
                 String sqlfilepath = filepath.Replace("\\", "\\\\");
-                db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + "," + mediaElement.Position.TotalMilliseconds + "," + "'" + note + "'" + "," + "'" + System.DateTime.Now + "'" + ")");
+                string a = mediaElement.Position.ToString();
+                string b = a.Substring(0, 8);//获取当前视频的时间
+                db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + ",'" + b+ "'," + "'" + note + "'" + "," + "'" + System.DateTime.Now + "'" + ")");
                 
                 //MySqlDataReader reader = db.executeQuery("select * from note where id=1");
                 //if (reader != null)
