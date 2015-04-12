@@ -123,6 +123,7 @@ namespace Moocnote
                     }
                 }
             }
+            reader.Close();
         }
 
         #endregion
