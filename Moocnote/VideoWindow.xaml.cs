@@ -46,6 +46,7 @@ namespace Moocnote
         {
             InitializeComponent();
             SetPlayer(false);
+            SetTxtbtn(false);
 
             this.Loaded += new RoutedEventHandler(Window_Loaded);
 
@@ -132,7 +133,8 @@ namespace Moocnote
                         notePanel.Children.Add(tb2);
                         notePanel.Children.Add(tb3);
 
-                        
+                        notePanel.Uid = reader.GetString(0);
+
                         notePanel.MouseDown += notePanel_MouseDown;
                         notePanel.MouseEnter +=notePanel_MouseEnter;
                         notePanel.MouseLeave +=notePanel_MouseLeave;
@@ -178,7 +180,12 @@ namespace Moocnote
                 }
                 else if (index == 1)
                 {
+                    
                     checkedNote.Text = tb.Text;
+                    assist.Text = notepanel.Uid;
+                    deleteBtn.IsEnabled = true;
+                    canupdateBtn.IsEnabled = true;
+                    
                 }
                 else if (index == 2)
                 {
@@ -190,6 +197,8 @@ namespace Moocnote
 
         
     }
+
+
 
 
 
@@ -234,6 +243,17 @@ namespace Moocnote
             stopBtn.IsEnabled = bVal;
             backBtn.IsEnabled = bVal;
             forwardBtn.IsEnabled = bVal;
+        }
+
+
+
+        private void SetTxtbtn(bool bVal)
+        {
+            deleteBtn.IsEnabled = bVal;
+            canupdateBtn.IsEnabled = bVal;
+            cancelBtn.IsEnabled = bVal;
+            updateBtn.IsEnabled = bVal;
+            
         }
 
         /*
@@ -421,22 +441,14 @@ namespace Moocnote
                 string b = a.Substring(0, 8);//获取当前视频的时间
                 db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + ",'" + b+ "'," + "'" + note + "'" + "," + "'" + System.DateTime.Now + "'" + ")");
                 setNote_List();
-                //MySqlDataReader reader = db.executeQuery("select * from note where id=1");
-                //if (reader != null)
-                //{
-                //    while (reader.Read())
-                //    {
-                //        if (reader.HasRows)
-                //        {
-                //            //System.Windows.Forms.MessageBox.Show(reader.GetInt32(0) + " " + reader.GetString(1));
-                //        }
-                //    }
-                //}
             }
         }
 
-        private void noteTxt_TextChanged(object sender, TextChangedEventArgs e)
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
+            db.executeUpdate("delete from note where id = '"+assist.Text +"';");
+            checkedNote.Text = "";
+            setNote_List();
 
         }
 
