@@ -85,6 +85,8 @@ namespace Moocnote
             }
             mediaElement.Source = new Uri(filepath, UriKind.Relative);
             playBtn.IsEnabled = true;
+
+            
             //timer.Tick += new EventHandler(timer_Tick);
 
             setNote_List();
@@ -129,6 +131,7 @@ namespace Moocnote
                         notePanel.Children.Add(tb1);
                         notePanel.Children.Add(tb2);
                         notePanel.Children.Add(tb3);
+
                         
                         notePanel.MouseDown += notePanel_MouseDown;
                 
@@ -153,11 +156,13 @@ namespace Moocnote
                 //一个stackpanel包含三个textblock，由index区别
                 if (index == 0)
                 {
-                    Console.WriteLine(tb.Text);
+                    TimeSpan ts = TimeSpan.Parse(tb.Text );
+                    mediaElement.Position=ts;
+                    //Console.WriteLine(tb.Text);
                 }
                 else if (index == 1)
                 {
-
+                    checkedNote.Text = tb.Text;
                 }
                 else if (index == 2)
                 {

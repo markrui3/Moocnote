@@ -119,7 +119,7 @@
 
                 <Border Style="{StaticResource notCalledBorder}">
                     <StackPanel >
-                        <TextBlock x:Name="checkedNote" Height="145" ></TextBlock>
+                        <TextBox x:Name="checkedNote" Height="145" ></TextBox>
                 </StackPanel>
                     </Border>
 
