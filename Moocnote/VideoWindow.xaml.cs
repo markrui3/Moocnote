@@ -121,6 +121,7 @@ namespace Moocnote
                         //string minute = Convert.ToString(m);
                         //string second = Convert.ToString(s);
                         //tb1.Text = string.Format ("{0:mm}:{1:ss}",minute ,second );
+
                         tb1.Text = reader.GetString(2);
                         tb2.Text = reader.GetString(3);
                         tb3.Text = reader.GetString(4);
@@ -139,10 +140,34 @@ namespace Moocnote
             reader.Close();
         }
 
-    private void notePanel_MouseDown(object sender, RoutedEventArgs e)
+    private void notePanel_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        StackPanel panel = (StackPanel)e.Source;
-        panel.Children.ToString();
+        if (e.ClickCount == 2)
+        {
+            TextBlock temp = (TextBlock)e.Source;
+            StackPanel notepanel = (StackPanel)temp.Parent;
+
+            int index = 0;
+            foreach (TextBlock tb in notepanel.Children)
+            {
+                //一个stackpanel包含三个textblock，由index区别
+                if (index == 0)
+                {
+                    Console.WriteLine(tb.Text);
+                }
+                else if (index == 1)
+                {
+
+                }
+                else if (index == 2)
+                {
+
+                }
+                index++;
+            }
+        }
+
+        
     }
 
 
