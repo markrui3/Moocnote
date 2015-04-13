@@ -134,6 +134,8 @@ namespace Moocnote
 
                         
                         notePanel.MouseDown += notePanel_MouseDown;
+                        notePanel.MouseEnter +=notePanel_MouseEnter;
+                        notePanel.MouseLeave +=notePanel_MouseLeave;
                 
                         noteItem.Items.Add(notePanel);
                         //system.windows.forms.messagebox.show(reader.getint32(0) + " " + reader.getstring(1));
@@ -142,6 +144,20 @@ namespace Moocnote
             }
             reader.Close();
         }
+
+    private void notePanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        StackPanel notepanel = (StackPanel)e.Source;
+        notepanel.Background = System.Windows.Media.Brushes.White;
+    }
+
+    private void notePanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        //TextBlock temp = (TextBlock)e.Source;
+        //StackPanel notepanel = (StackPanel)temp.Parent;
+        StackPanel notepanel = (StackPanel)e.Source;
+        notepanel.Background = System.Windows.Media.Brushes.Red;
+    }
 
     private void notePanel_MouseDown(object sender, MouseButtonEventArgs e)
     {
