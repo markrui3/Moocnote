@@ -101,7 +101,7 @@ namespace Moocnote
             MySqlDataReader reader = db.executeQuery("select * from note where videoaddr='" + sqlfilepath + "' order by videotime;");
             if (reader != null)
             {
-                noteItem.Items.Clear();
+               noteItem.Items.Clear();
                 while (reader.Read())
                 {
                     if (reader.HasRows)
@@ -128,7 +128,8 @@ namespace Moocnote
                         notePanel.Children.Add(tb1);
                         notePanel.Children.Add(tb2);
                         notePanel.Children.Add(tb3);
-
+                        
+                        notePanel.MouseDown += notePanel_MouseDown;
                 
                         noteItem.Items.Add(notePanel);
                         //system.windows.forms.messagebox.show(reader.getint32(0) + " " + reader.getstring(1));
@@ -137,6 +138,12 @@ namespace Moocnote
             }
             reader.Close();
         }
+
+    private void notePanel_MouseDown(object sender, RoutedEventArgs e)
+    {
+        StackPanel panel = (StackPanel)e.Source;
+        panel.Children.ToString();
+    }
 
 
 
@@ -386,6 +393,7 @@ namespace Moocnote
         {
 
         }
+
 
 
     }

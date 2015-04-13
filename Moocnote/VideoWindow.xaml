@@ -99,6 +99,8 @@
                     </StackPanel>
                 </Border >
                 <Border Style="{StaticResource notCalledBorder}" >
+                    
+                    
                     <ItemsControl x:Name="noteItem" Height="208" >
                     <ItemsControl.Template>
                         <ControlTemplate>
@@ -109,7 +111,11 @@
                     </ItemsControl.Template>
                         
                     </ItemsControl>
-                    </Border> 
+                    
+
+
+
+                </Border> 
 
                 <Border Style="{StaticResource notCalledBorder}">
                     <StackPanel >
