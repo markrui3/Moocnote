@@ -87,24 +87,24 @@ namespace Moocnote
             mediaElement.Source = new Uri(filepath, UriKind.Relative);
             playBtn.IsEnabled = true;
 
-            
+
             //timer.Tick += new EventHandler(timer_Tick);
 
             setNote_List();
-           
+
         }
 
         #endregion
 
 
-    private void setNote_List()
+        private void setNote_List()
         {
             //刷新notepanel信息
             String sqlfilepath = filepath.Replace("\\", "\\\\");
             MySqlDataReader reader = db.executeQuery("select * from note where videoaddr='" + sqlfilepath + "' order by videotime;");
             if (reader != null)
             {
-               noteItem.Items.Clear();
+                noteItem.Items.Clear();
                 while (reader.Read())
                 {
                     if (reader.HasRows)
@@ -136,9 +136,9 @@ namespace Moocnote
                         notePanel.Uid = reader.GetString(0);
 
                         notePanel.MouseDown += notePanel_MouseDown;
-                        notePanel.MouseEnter +=notePanel_MouseEnter;
-                        notePanel.MouseLeave +=notePanel_MouseLeave;
-                
+                        notePanel.MouseEnter += notePanel_MouseEnter;
+                        notePanel.MouseLeave += notePanel_MouseLeave;
+
                         noteItem.Items.Add(notePanel);
                         //system.windows.forms.messagebox.show(reader.getint32(0) + " " + reader.getstring(1));
                     }
@@ -147,56 +147,57 @@ namespace Moocnote
             reader.Close();
         }
 
-    private void notePanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-    {
-        StackPanel notepanel = (StackPanel)e.Source;
-        notepanel.Background = System.Windows.Media.Brushes.White;
-    }
-
-    private void notePanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-    {
-        //TextBlock temp = (TextBlock)e.Source;
-        //StackPanel notepanel = (StackPanel)temp.Parent;
-        StackPanel notepanel = (StackPanel)e.Source;
-        notepanel.Background = System.Windows.Media.Brushes.Red;
-    }
-
-    private void notePanel_MouseDown(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ClickCount == 2)
+        private void notePanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            TextBlock temp = (TextBlock)e.Source;
-            StackPanel notepanel = (StackPanel)temp.Parent;
-
-            int index = 0;
-            foreach (TextBlock tb in notepanel.Children)
-            {
-                //一个stackpanel包含三个textblock，由index区别
-                if (index == 0)
-                {
-                    TimeSpan ts = TimeSpan.Parse(tb.Text );
-                    mediaElement.Position=ts;
-                    //Console.WriteLine(tb.Text);
-                }
-                else if (index == 1)
-                {
-                    
-                    checkedNote.Text = tb.Text;
-                    assist.Text = notepanel.Uid;
-                    deleteBtn.IsEnabled = true;
-                    canupdateBtn.IsEnabled = true;
-                    
-                }
-                else if (index == 2)
-                {
-
-                }
-                index++;
-            }
+            StackPanel notepanel = (StackPanel)e.Source;
+            notepanel.Background = System.Windows.Media.Brushes.White;
         }
 
-        
-    }
+        private void notePanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            //TextBlock temp = (TextBlock)e.Source;
+            //StackPanel notepanel = (StackPanel)temp.Parent;
+            StackPanel notepanel = (StackPanel)e.Source;
+            notepanel.Background = System.Windows.Media.Brushes.Red;
+        }
+
+        private void notePanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                TextBlock temp = (TextBlock)e.Source;
+                StackPanel notepanel = (StackPanel)temp.Parent;
+
+                int index = 0;
+                foreach (TextBlock tb in notepanel.Children)
+                {
+                    //一个stackpanel包含三个textblock，由index区别
+                    if (index == 0)
+                    {
+                        TimeSpan ts = TimeSpan.Parse(tb.Text);
+                        mediaElement.Position = ts;
+                        //Console.WriteLine(tb.Text);
+                    }
+                    else if (index == 1)
+                    {
+
+                        checkedNote.Text = tb.Text;
+                        assist.Text = notepanel.Uid;
+                        assist2.Text = tb.Text;
+                        deleteBtn.IsEnabled = true;
+                        canupdateBtn.IsEnabled = true;
+
+                    }
+                    else if (index == 2)
+                    {
+
+                    }
+                    index++;
+                }
+            }
+
+
+        }
 
 
 
@@ -253,7 +254,7 @@ namespace Moocnote
             canupdateBtn.IsEnabled = bVal;
             cancelBtn.IsEnabled = bVal;
             updateBtn.IsEnabled = bVal;
-            
+
         }
 
         /*
@@ -439,20 +440,95 @@ namespace Moocnote
                 String sqlfilepath = filepath.Replace("\\", "\\\\");
                 string a = mediaElement.Position.ToString();
                 string b = a.Substring(0, 8);//获取当前视频的时间
-                db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + ",'" + b+ "'," + "'" + note + "'" + "," + "'" + System.DateTime.Now + "'" + ")");
+                db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + ",'" + b + "'," + "'" + note + "'" + "," + "'" + System.DateTime.Now + "'" + ")");
                 setNote_List();
             }
         }
 
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            db.executeUpdate("delete from note where id = '"+assist.Text +"';");
-            checkedNote.Text = "";
-            setNote_List();
+            //消息框中需要显示哪些按钮，此处显示“确定”和“取消”
+
+            MessageBoxButtons messButton = MessageBoxButtons.OKCancel;
+
+            //第一个参数是对话框的显示信息，第二个是对话框的标题
+
+            DialogResult dr = System.Windows.Forms.MessageBox.Show("确定要删除此条笔记吗?", "删除笔记", messButton);
+
+            if (dr == System.Windows.Forms.DialogResult.OK)//如果点击“确定”按钮
+            {
+
+                db.executeUpdate("delete from note where id = '" + assist.Text + "';");
+                checkedNote.Text = "";
+                deleteBtn.IsEnabled = false;
+                canupdateBtn.IsEnabled = false;
+                setNote_List();
+
+            }
+
+            else//如果点击“取消”按钮
+            {
+
+            }
 
         }
 
+        private void canupdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            deleteBtn.IsEnabled = false;
+            cancelBtn.IsEnabled = true;
+            updateBtn.IsEnabled = true;
+            checkedNote.IsReadOnly = false;
+        }
 
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            checkedNote.IsReadOnly = true;
+            checkedNote.Text = assist2.Text;
+            deleteBtn.IsEnabled = true;
+            canupdateBtn.IsEnabled = true;
+            cancelBtn.IsEnabled = false;
+            updateBtn.IsEnabled = false;
+            
 
+        }
+
+        private void updateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkedNote.Text ==assist2 .Text )
+            {
+                //MessageBoxButtons messButton = MessageBoxButtons.OK;
+                DialogResult dr = System.Windows.Forms.MessageBox.Show("您对此条笔记没有做任何更改");
+                checkedNote.IsReadOnly = true;
+                deleteBtn.IsEnabled = true;
+                canupdateBtn.IsEnabled = true;
+                cancelBtn.IsEnabled = false;
+                updateBtn.IsEnabled = false;
+            }
+            else if (checkedNote.Text != "")
+            {
+                db.executeUpdate("update note set note='"+checkedNote .Text +"' where id = '"+assist .Text +"';");
+                setNote_List();
+                checkedNote.IsReadOnly = true;
+                deleteBtn.IsEnabled = true;
+                canupdateBtn.IsEnabled = true;
+                cancelBtn.IsEnabled = false;
+                updateBtn.IsEnabled = false;
+            }
+            else if (checkedNote.Text == "")
+            {
+                DialogResult dr = System.Windows.Forms.MessageBox.Show("不能存入一条空笔记");
+                checkedNote.Text = assist2.Text;
+                checkedNote.IsReadOnly = true;
+                deleteBtn.IsEnabled = true;
+                canupdateBtn.IsEnabled = true;
+                cancelBtn.IsEnabled = false;
+                updateBtn.IsEnabled = false;
+            }
+           
+            
+            
+        }
     }
 }

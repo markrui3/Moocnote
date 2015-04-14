@@ -141,19 +141,20 @@
                         <TextBox x:Name="checkedNote" Height="145" Width=" 327" IsReadOnly="True"></TextBox>
                         <StackPanel >
                             <Button x:Name="deleteBtn" Style="{StaticResource btnStyle2}" Content="删除" Click="deleteBtn_Click" HorizontalAlignment="Left"  />
-                            <Button x:Name="canupdateBtn" Style="{StaticResource btnStyle2}" Content="修改" Click="deleteBtn_Click" HorizontalAlignment="Left"  />
-                            <Button x:Name="cancelBtn" Style="{StaticResource btnStyle2}" Content="取消" Click="deleteBtn_Click" HorizontalAlignment="Left"  />
-                            <Button x:Name="updateBtn" Style="{StaticResource btnStyle2}" Content="保存" Click="deleteBtn_Click" HorizontalAlignment="Left"  />
+                            <Button x:Name="canupdateBtn" Style="{StaticResource btnStyle2}" Content="修改" Click="canupdateBtn_Click" HorizontalAlignment="Left"  />
+                            <Button x:Name="cancelBtn" Style="{StaticResource btnStyle2}" Content="取消" Click="cancelBtn_Click" HorizontalAlignment="Left"  />
+                            <Button x:Name="updateBtn" Style="{StaticResource btnStyle2}" Content="保存" Click="updateBtn_Click" HorizontalAlignment="Left"  />
                         </StackPanel>
                     </StackPanel>
                     </Border>
 
                 <TextBlock x:Name="assist" Visibility="Collapsed" />
+                <TextBlock x:Name="assist2" Visibility="Collapsed" />
                 <Border Style="{StaticResource notCalledBorder}" >
                         <TextBox x:Name="noteTxt" Height="86"  TextWrapping="Wrap"  Text="hai" Margin="0,0,1,0" />
                </Border> 
                 <StackPanel >
-                    <Button x:Name="saveBtn" Height=" 25" Width=" 40" Content="保存" Click="deleteBtn_Click" HorizontalAlignment="Right" />
+                    <Button x:Name="saveBtn" Height=" 25" Width=" 40" Content="保存" Click="saveBtn_Click" HorizontalAlignment="Right" />
                 </StackPanel>
 
 
