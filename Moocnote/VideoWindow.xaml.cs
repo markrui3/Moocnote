@@ -43,7 +43,7 @@ namespace Moocnote
         String filepath = "";
 
         //存储视频时间和对应text
-        Dictionary<String, List<String>> dic = new Dictionary<String, List<String>>();
+        Dictionary<String, Dictionary<String, String>> dic = new Dictionary<String, Dictionary<String, String>>();
 
         public VideoWindow()
         {
@@ -132,27 +132,28 @@ namespace Moocnote
 
                         String videoTime = reader.GetString(2);
                         String note = reader.GetString(3);
+                        String id = reader.GetString(0);
 
                         tb1.Text = videoTime;
                         tb2.Text = note;
                         tb3.Text = reader.GetString(4);
 
-                        if (dic.Keys.Contains(reader.GetString(2)))
+                        if (dic.Keys.Contains(videoTime))
                         {
-                            dic[videoTime].Add(note);
+                            dic[videoTime].Add(id, note);
                         }
                         else
                         {
-                            List<String> list = new List<String>();
-                            list.Add(note);
-                            dic.Add(reader.GetString(2), list);
+                            Dictionary<String, String> temp = new Dictionary<String, String>();
+                            temp.Add(id, note);
+                            dic.Add(videoTime, temp);
                         }
 
                         notePanel.Children.Add(tb1);
                         notePanel.Children.Add(tb2);
                         notePanel.Children.Add(tb3);
 
-                        notePanel.Uid = reader.GetString(0);
+                        notePanel.Uid = id;
 
                         notePanel.MouseDown += notePanel_MouseDown;
                         notePanel.MouseEnter += notePanel_MouseEnter;
@@ -249,14 +250,7 @@ namespace Moocnote
                                "播放进度：",
                                mediaElement.Position.Hours,
                                mediaElement.Position.Minutes,
-                               mediaElement.Position.Seconds);
-
-            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
-            if (dic.Keys.Contains(videoTime))
-            {
-                Console.WriteLine(dic[videoTime][0]);
-            }
-            
+                               mediaElement.Position.Seconds); 
         }
 
         /*
@@ -389,6 +383,29 @@ namespace Moocnote
             mediaElement.Position = ts;
             //timelineSlider.ToolTip = mediaElement.Position.ToString().Substring(0, 8);
             //mediaElement.Play();
+
+            //视频跳到有笔记的一点时，笔记变红，可以修改
+            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
+            if (dic.Keys.Contains(videoTime))
+            {
+                assist.Text = dic[videoTime].Keys.ElementAt(0);
+                assist2.Text = dic[videoTime].Values.ElementAt(0);
+                checkedNote.Text = dic[videoTime].Values.ElementAt(0);
+                deleteBtn.IsEnabled = true;
+                canupdateBtn.IsEnabled = true;
+
+                foreach (StackPanel notepanel in noteItem.Items)
+                {
+                    if (notepanel.Uid == dic[videoTime].Keys.ElementAt(0))
+                    {
+                        notepanel.Background = System.Windows.Media.Brushes.Red;
+                    }
+                    else
+                    {
+                        notepanel.Background = System.Windows.Media.Brushes.White;
+                    }
+                }
+            }
         }
         #endregion
 
