@@ -42,6 +42,9 @@ namespace Moocnote
         //视频位置
         String filepath = "";
 
+        //存储视频时间和对应text
+        Dictionary<String, String> dic = new Dictionary<String, String>();
+
         public VideoWindow()
         {
             InitializeComponent();
@@ -128,6 +131,8 @@ namespace Moocnote
                         tb1.Text = reader.GetString(2);
                         tb2.Text = reader.GetString(3);
                         tb3.Text = reader.GetString(4);
+
+                        dic.Add(reader.GetString(2), reader.GetString(3));
 
                         notePanel.Children.Add(tb1);
                         notePanel.Children.Add(tb2);
@@ -225,13 +230,19 @@ namespace Moocnote
             timelineSlider.Value = mediaElement.Position.TotalMilliseconds;
 
             // txtTime.Text = mediaElement.Position.ToString().Substring(0, 8);
-
+            String s = string.Format(
+                               "{0}{1:00}:{2:00}:{3:00}",
+                               "播放进度：",
+                               mediaElement.Position.Hours,
+                               mediaElement.Position.Minutes,
+                               mediaElement.Position.Seconds);
             txtTime.Text = string.Format(
                                "{0}{1:00}:{2:00}:{3:00}",
                                "播放进度：",
                                mediaElement.Position.Hours,
                                mediaElement.Position.Minutes,
                                mediaElement.Position.Seconds);
+            System.Windows.Forms.MessageBox.Show(dic[s].ToString());
         }
 
         /*
