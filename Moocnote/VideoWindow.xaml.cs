@@ -43,7 +43,7 @@ namespace Moocnote
         String filepath = "";
 
         //存储视频时间和对应text
-        Dictionary<String, String> dic = new Dictionary<String, String>();
+        Dictionary<String, List<String>> dic = new Dictionary<String, List<String>>();
 
         public VideoWindow()
         {
@@ -102,6 +102,8 @@ namespace Moocnote
 
         private void setNote_List()
         {
+            dic.Clear();
+
             //刷新notepanel信息
             String sqlfilepath = filepath.Replace("\\", "\\\\");
             MySqlDataReader reader = db.executeQuery("select * from note where videoaddr='" + sqlfilepath + "' order by videotime;");
@@ -128,11 +130,23 @@ namespace Moocnote
                         //string second = Convert.ToString(s);
                         //tb1.Text = string.Format ("{0:mm}:{1:ss}",minute ,second );
 
-                        tb1.Text = reader.GetString(2);
-                        tb2.Text = reader.GetString(3);
+                        String videoTime = reader.GetString(2);
+                        String note = reader.GetString(3);
+
+                        tb1.Text = videoTime;
+                        tb2.Text = note;
                         tb3.Text = reader.GetString(4);
 
-                        dic.Add(reader.GetString(2), reader.GetString(3));
+                        if (dic.Keys.Contains(reader.GetString(2)))
+                        {
+                            dic[videoTime].Add(note);
+                        }
+                        else
+                        {
+                            List<String> list = new List<String>();
+                            list.Add(note);
+                            dic.Add(reader.GetString(2), list);
+                        }
 
                         notePanel.Children.Add(tb1);
                         notePanel.Children.Add(tb2);
@@ -230,19 +244,19 @@ namespace Moocnote
             timelineSlider.Value = mediaElement.Position.TotalMilliseconds;
 
             // txtTime.Text = mediaElement.Position.ToString().Substring(0, 8);
-            String s = string.Format(
-                               "{0}{1:00}:{2:00}:{3:00}",
-                               "播放进度：",
-                               mediaElement.Position.Hours,
-                               mediaElement.Position.Minutes,
-                               mediaElement.Position.Seconds);
             txtTime.Text = string.Format(
                                "{0}{1:00}:{2:00}:{3:00}",
                                "播放进度：",
                                mediaElement.Position.Hours,
                                mediaElement.Position.Minutes,
                                mediaElement.Position.Seconds);
-            System.Windows.Forms.MessageBox.Show(dic[s].ToString());
+
+            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
+            if (dic.Keys.Contains(videoTime))
+            {
+                Console.WriteLine(dic[videoTime][0]);
+            }
+            
         }
 
         /*
@@ -406,7 +420,7 @@ namespace Moocnote
             timer = new DispatcherTimer();
 
             // 每 500 毫秒调用一次指定的方法
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
 
