@@ -64,7 +64,7 @@
                         </LinearGradientBrush>
                     </Border.BorderBrush>
                     <MediaElement Height="300" Width="450" MediaEnded="mediaElement_MediaEnded" Name="mediaElement" MediaOpened="mediaElement_MediaOpened" Volume="{Binding ElementName=volumeSlider, Path=Value}"
-                       UnloadedBehavior="Stop" Stretch="Fill" LoadedBehavior="Manual"
+                       UnloadedBehavior="Stop" Stretch="Fill" LoadedBehavior="Manual" 
 />
                 </Border>
 
