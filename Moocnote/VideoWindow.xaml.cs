@@ -44,6 +44,7 @@ namespace Moocnote
         //存储视频时间和对应text
         Dictionary<String, Dictionary<String, String>> dic = new Dictionary<String, Dictionary<String, String>>();
         //暂停时移动进度条的辅助
+        //bool isPlayed = true ;
 
         public VideoWindow()
         {
@@ -215,7 +216,8 @@ namespace Moocnote
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            timelineSlider.ValueChanged += timelineSlider_ValueChanged;
+            //timelineSlider.ValueChanged += timelineSlider_ValueChanged;
+            timelineSlider.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(timelineSlider_ValueChanged), true);
 
             //窗口设置
             this.WindowState = System.Windows.WindowState.Normal;
@@ -240,7 +242,31 @@ namespace Moocnote
                                "播放进度：",
                                mediaElement.Position.Hours,
                                mediaElement.Position.Minutes,
-                               mediaElement.Position.Seconds); 
+                               mediaElement.Position.Seconds);
+
+
+            //视频跳到有笔记的一点时，笔记变红，可以修改
+            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
+            if (dic.Keys.Contains(videoTime))
+            {
+                assist.Text = dic[videoTime].Keys.ElementAt(0);
+                assist2.Text = dic[videoTime].Values.ElementAt(0);
+                checkedNote.Text = dic[videoTime].Values.ElementAt(0);
+                deleteBtn.IsEnabled = true;
+                canupdateBtn.IsEnabled = true;
+
+                foreach (StackPanel notepanel in noteItem.Items)
+                {
+                    if (notepanel.Uid == dic[videoTime].Keys.ElementAt(0))
+                    {
+                        notepanel.Background = System.Windows.Media.Brushes.Red;
+                    }
+                    else
+                    {
+                        notepanel.Background = System.Windows.Media.Brushes.White;
+                    }
+                }
+            }
         }
 
         #region 播放器的各种按钮函数
@@ -376,38 +402,15 @@ namespace Moocnote
 
         #endregion
 
-        #region 播放进度，跳转到播放的哪个地方timelineSlider_ValueChanged
-        private void timelineSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        #region 播放进度，跳转到指定的某个地方timelineSlider_ValueChanged
+        private void timelineSlider_ValueChanged(object sender, MouseButtonEventArgs e)
         {
-            
+          
             int SliderValue = (int)timelineSlider.Value;
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
             mediaElement.Position = ts;
             //timelineSlider.ToolTip = mediaElement.Position.ToString().Substring(0, 8);
             //mediaElement.Play();
-
-            //视频跳到有笔记的一点时，笔记变红，可以修改
-            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
-            if (dic.Keys.Contains(videoTime))
-            {
-                assist.Text = dic[videoTime].Keys.ElementAt(0);
-                assist2.Text = dic[videoTime].Values.ElementAt(0);
-                checkedNote.Text = dic[videoTime].Values.ElementAt(0);
-                deleteBtn.IsEnabled = true;
-                canupdateBtn.IsEnabled = true;
-
-                foreach (StackPanel notepanel in noteItem.Items)
-                {
-                    if (notepanel.Uid == dic[videoTime].Keys.ElementAt(0))
-                    {
-                        notepanel.Background = System.Windows.Media.Brushes.Red;
-                    }
-                    else
-                    {
-                        notepanel.Background = System.Windows.Media.Brushes.White;
-                    }
-                }
-            }
         }
         #endregion
 
