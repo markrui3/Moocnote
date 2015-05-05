@@ -32,10 +32,9 @@ namespace Moocnote
          */
         private TimeSpan duration;
         private DispatcherTimer timer = new DispatcherTimer();
-        /*
-       * 进度时间设置1
-       */
-        public Bitmap bmp = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);
+
+        //public Bitmap bmp = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);
+
         //数据库操作对象实例化
         DBConnection db = new DBConnection();
 
@@ -55,18 +54,6 @@ namespace Moocnote
 
             mediaElement.MediaOpened += new RoutedEventHandler(mediaElement_MediaOpened);
             mediaElement.MediaEnded += new RoutedEventHandler(mediaElement_MediaEnded);
-
-            /*
-           * 进度时间设置2
-           */
-            //装载计时器
-            //timelineSlider.Value = 0;
-            //设置计时器精确度 
-            //timer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
-            //timer.Interval = TimeSpan.FromSeconds(0.1);
-            /*
-            * 进度时间设置2
-            */
         }
 
         #region 选择视频文件对话框
@@ -88,10 +75,13 @@ namespace Moocnote
                 return;
             }
             mediaElement.Source = new Uri(filepath, UriKind.Relative);
-            playBtn.IsEnabled = true;
+            //playBtn.IsEnabled = true;
 
 
             //timer.Tick += new EventHandler(timer_Tick);
+            //openBtn.Click += playBtn_Click;
+            SetPlayer(true);
+            mediaElement.Play();
 
             setNote_List();
 
@@ -99,7 +89,7 @@ namespace Moocnote
 
         #endregion
 
-
+        #region 刷新笔记列表
         private void setNote_List()
         {
             dic.Clear();
@@ -166,7 +156,9 @@ namespace Moocnote
             }
             reader.Close();
         }
+        #endregion
 
+        #region 笔记列表的鼠标动作函数
         private void notePanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             StackPanel notepanel = (StackPanel)e.Source;
@@ -218,10 +210,7 @@ namespace Moocnote
 
 
         }
-
-
-
-
+        #endregion
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -253,6 +242,7 @@ namespace Moocnote
                                mediaElement.Position.Seconds); 
         }
 
+        #region 播放器的各种按钮函数
         /*
          * 设置播放，暂停，停止，前进，后退按钮是否可用
          */
@@ -264,8 +254,6 @@ namespace Moocnote
             backBtn.IsEnabled = bVal;
             forwardBtn.IsEnabled = bVal;
         }
-
-
 
         private void SetTxtbtn(bool bVal)
         {
@@ -314,7 +302,9 @@ namespace Moocnote
             *****************************/
         }
 
-
+        /*
+         * 停止播放视频
+         */
         private void stopBtn_Click(object sender, RoutedEventArgs e)
         {
             mediaElement.Stop();
@@ -329,18 +319,24 @@ namespace Moocnote
             *进度时间设置5
             *****************************/
         }
-
+        /*
+         * 视频快退
+         */
         private void backBtn_Click(object sender, RoutedEventArgs e)
         {
             mediaElement.Position = mediaElement.Position - TimeSpan.FromSeconds(10);
         }
-
+        /*
+         * 视频快进
+         */
         private void forwardBtn_Click(object sender, RoutedEventArgs e)
         {
             mediaElement.Position = mediaElement.Position + TimeSpan.FromSeconds(10);
         }
 
-        #region 跳转到指定秒数播放视频
+        /*
+         *  跳转到指定秒数播放视频
+         */
         private void skipBtn_Click(object sender, RoutedEventArgs e)
         {
             string Current_Position = textBox1.Text;
@@ -361,19 +357,23 @@ namespace Moocnote
                 mediaElement.Play();
             }
         }
-        #endregion
-        /*****************************
-        #region 截屏
-        private void radButton2_Click(object sender, RoutedEventArgs e)
+
+        private void muteBtn_Click(object sender, RoutedEventArgs e)
         {
-            Graphics g = Graphics.FromImage(bmp);
-            System.Drawing.Size ss = new System.Drawing.Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);
-            g.CopyFromScreen(0, 0, 0, 0, ss);
-            frmScreen f = new frmScreen(bmp);
-            f.Show();
+            // IsMuted - 是否静音
+            if (mediaElement.IsMuted == true)
+            {
+                muteBtn.Content = "静音";
+                mediaElement.IsMuted = false;
+            }
+            else
+            {
+                muteBtn.Content = "有声";
+                mediaElement.IsMuted = true;
+            }
         }
+
         #endregion
-        *****************************/
 
         #region 播放进度，跳转到播放的哪个地方
         private void timelineSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -409,20 +409,13 @@ namespace Moocnote
         }
         #endregion
 
-
-
-
-
-
-
-
         private void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
         {
 
             timelineSlider.Minimum = 0;
-            timelineSlider.Maximum = mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds;
+            timelineSlider.Maximum = mediaElement.NaturalDuration.HasTimeSpan ? mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds : 0;
             duration = mediaElement.NaturalDuration.HasTimeSpan ? mediaElement.NaturalDuration.TimeSpan : TimeSpan.FromMilliseconds(0);
-            totalTime.Text += string.Format(
+            totalTime.Text = string.Format(
                  "{0}{1:00}:{2:00}:{3:00}", "总时长：",
                  duration.Hours,
                  duration.Minutes,
@@ -440,16 +433,6 @@ namespace Moocnote
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
-
-
-        }
-
-
-
-
-        private void MediaTimeChanged(object sender, EventArgs e)
-        {
-            timelineSlider.Value = mediaElement.Position.TotalMilliseconds;
         }
 
         private void mediaElement_MediaEnded(object sender, RoutedEventArgs e)
@@ -458,22 +441,7 @@ namespace Moocnote
             timelineSlider.Value = 0;
         }
 
-
-        private void muteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            // IsMuted - 是否静音
-            if (mediaElement.IsMuted == true)
-            {
-                muteBtn.Content = "静音";
-                mediaElement.IsMuted = false;
-            }
-            else
-            {
-                muteBtn.Content = "有声";
-                mediaElement.IsMuted = true;
-            }
-        }
-
+        #region 笔记操作的各种按钮
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             String note = noteTxt.Text;
@@ -518,9 +486,13 @@ namespace Moocnote
         private void canupdateBtn_Click(object sender, RoutedEventArgs e)
         {
             deleteBtn.IsEnabled = false;
+            canupdateBtn.IsEnabled = false;
             cancelBtn.IsEnabled = true;
             updateBtn.IsEnabled = true;
             checkedNote.IsReadOnly = false;
+            canupdateBtn.Click += pauseBtn_Click;
+
+
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
@@ -532,7 +504,6 @@ namespace Moocnote
             canupdateBtn.IsEnabled = true;
             cancelBtn.IsEnabled = false;
             updateBtn.IsEnabled = false;
-            
 
         }
 
@@ -568,9 +539,21 @@ namespace Moocnote
                 cancelBtn.IsEnabled = false;
                 updateBtn.IsEnabled = false;
             }
-           
-            
-            
+        }
+        #endregion
+    }
+
+
+    public class ProgressConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return ((TimeSpan)value).TotalSeconds;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return TimeSpan.FromSeconds((double)value);
         }
     }
 }
