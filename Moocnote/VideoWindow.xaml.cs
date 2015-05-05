@@ -216,7 +216,7 @@ namespace Moocnote
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //timelineSlider.ValueChanged += timelineSlider_ValueChanged;
+            timelineSlider.ValueChanged += timelineSlider_ValueChanged2;
             timelineSlider.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(timelineSlider_ValueChanged), true);
 
             //窗口设置
@@ -244,29 +244,6 @@ namespace Moocnote
                                mediaElement.Position.Minutes,
                                mediaElement.Position.Seconds);
 
-
-            //视频跳到有笔记的一点时，笔记变红，可以修改
-            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
-            if (dic.Keys.Contains(videoTime))
-            {
-                assist.Text = dic[videoTime].Keys.ElementAt(0);
-                assist2.Text = dic[videoTime].Values.ElementAt(0);
-                checkedNote.Text = dic[videoTime].Values.ElementAt(0);
-                deleteBtn.IsEnabled = true;
-                canupdateBtn.IsEnabled = true;
-
-                foreach (StackPanel notepanel in noteItem.Items)
-                {
-                    if (notepanel.Uid == dic[videoTime].Keys.ElementAt(0))
-                    {
-                        notepanel.Background = System.Windows.Media.Brushes.Red;
-                    }
-                    else
-                    {
-                        notepanel.Background = System.Windows.Media.Brushes.White;
-                    }
-                }
-            }
         }
 
         #region 播放器的各种按钮函数
@@ -412,6 +389,32 @@ namespace Moocnote
             //timelineSlider.ToolTip = mediaElement.Position.ToString().Substring(0, 8);
             //mediaElement.Play();
         }
+        private void timelineSlider_ValueChanged2(object sender, RoutedEventArgs e)
+        {
+
+            //视频跳到有笔记的一点时，笔记变红，可以修改
+            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
+            if (dic.Keys.Contains(videoTime))
+            {
+                assist.Text = dic[videoTime].Keys.ElementAt(0);
+                assist2.Text = dic[videoTime].Values.ElementAt(0);
+                checkedNote.Text = dic[videoTime].Values.ElementAt(0);
+                deleteBtn.IsEnabled = true;
+                canupdateBtn.IsEnabled = true;
+
+                foreach (StackPanel notepanel in noteItem.Items)
+                {
+                    if (notepanel.Uid == dic[videoTime].Keys.ElementAt(0))
+                    {
+                        notepanel.Background = System.Windows.Media.Brushes.Red;
+                    }
+                    else
+                    {
+                        notepanel.Background = System.Windows.Media.Brushes.White;
+                    }
+                }
+            }
+        }
         #endregion
 
         private void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
@@ -495,9 +498,8 @@ namespace Moocnote
             cancelBtn.IsEnabled = true;
             updateBtn.IsEnabled = true;
             checkedNote.IsReadOnly = false;
-            canupdateBtn.Click += pauseBtn_Click;
-
-
+            //canupdateBtn.Click += pauseBtn_Click;
+            mediaElement.Pause();
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
@@ -526,6 +528,7 @@ namespace Moocnote
             }
             else if (checkedNote.Text != "")
             {
+                assist2.Text  = checkedNote.Text;
                 db.executeUpdate("update note set note='"+checkedNote .Text +"' where id = '"+assist .Text +"';");
                 setNote_List();
                 checkedNote.IsReadOnly = true;
@@ -548,17 +551,4 @@ namespace Moocnote
         #endregion
     }
 
-
-    public class ProgressConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return ((TimeSpan)value).TotalSeconds;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return TimeSpan.FromSeconds((double)value);
-        }
-    }
 }
