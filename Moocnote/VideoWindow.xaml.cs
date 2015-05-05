@@ -43,6 +43,7 @@ namespace Moocnote
 
         //存储视频时间和对应text
         Dictionary<String, Dictionary<String, String>> dic = new Dictionary<String, Dictionary<String, String>>();
+        //暂停时移动进度条的辅助
 
         public VideoWindow()
         {
@@ -375,9 +376,10 @@ namespace Moocnote
 
         #endregion
 
-        #region 播放进度，跳转到播放的哪个地方
+        #region 播放进度，跳转到播放的哪个地方timelineSlider_ValueChanged
         private void timelineSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            
             int SliderValue = (int)timelineSlider.Value;
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
             mediaElement.Position = ts;
