@@ -66,7 +66,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <UserControl >
+    <Viewbox  >
         <Grid>
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width=" 500"></ColumnDefinition>
@@ -129,16 +129,19 @@
                             <GradientStop Offset="0.5" Color="Gray"/>
                         </LinearGradientBrush>
                     </Border.BorderBrush>
-                    <MediaElement Name="mediaElement" Height="300" Width="450" MediaEnded="mediaElement_MediaEnded"  MediaOpened="mediaElement_MediaOpened" Volume="{Binding Value, ElementName=volumeSlider}"
+                    <MediaElement Name="mediaElement" ScrubbingEnabled="True" Height="300" Width="450" MediaEnded="mediaElement_MediaEnded"  MediaOpened="mediaElement_MediaOpened" Volume="{Binding Value, ElementName=volumeSlider}"
                        UnloadedBehavior="Stop" Stretch="Fill" LoadedBehavior="Manual" 
 />
                 </Border>
 
                 <Slider Name="timelineSlider"  Style="{StaticResource progressSlider}" Margin="5" Width="450" 
         HorizontalAlignment="Center"  ValueChanged="timelineSlider_ValueChanged" PreviewMouseUp="timelineSlider_PreviewMouseUp" />
-
-                <TextBlock Width="110" x:Name="txtTime"/>
-                <TextBlock Width="96" x:Name="totalTime" />
+                <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
+                    <TextBlock Width="47" x:Name="txtTime"  Foreground="Gray"/>
+                    <TextBlock Width="96" x:Name="totalTime"  Foreground="Gray" />
+                </StackPanel>
+                
+                
                 <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
                     <Button x:Name="openBtn" Content="选择视频" 
                 Style="{StaticResource btnStyle}" Click="openBtn_Click"/>
@@ -226,5 +229,5 @@
             </StackPanel>
 
         </Grid>
-    </UserControl>
+    </Viewbox>
 </Window>

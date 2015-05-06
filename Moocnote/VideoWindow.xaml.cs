@@ -245,12 +245,12 @@ namespace Moocnote
             //使播放进度条跟随播放时间移动
             //timelineSlider.ToolTip = mediaElement.Position.ToString().Substring(0, 8);
 
-            timelineSlider.Value = mediaElement.Position.TotalMilliseconds;
+            timelineSlider.Value = mediaElement.Position.TotalSeconds;
 
             // txtTime.Text = mediaElement.Position.ToString().Substring(0, 8);
             txtTime.Text = string.Format(
-                               "{0}{1:00}:{2:00}:{3:00}",
-                               "播放进度：",
+                               "{0:00}:{1:00}:{2:00}",
+                               
                                mediaElement.Position.Hours,
                                mediaElement.Position.Minutes,
                                mediaElement.Position.Seconds);
@@ -468,10 +468,10 @@ namespace Moocnote
         {
 
             timelineSlider.Minimum = 0;
-            timelineSlider.Maximum = mediaElement.NaturalDuration.HasTimeSpan ? mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds : 0;
-            duration = mediaElement.NaturalDuration.HasTimeSpan ? mediaElement.NaturalDuration.TimeSpan : TimeSpan.FromMilliseconds(0);
+            timelineSlider.Maximum = mediaElement.NaturalDuration.HasTimeSpan ? mediaElement.NaturalDuration.TimeSpan.TotalSeconds : 0;
+            duration = mediaElement.NaturalDuration.HasTimeSpan ? mediaElement.NaturalDuration.TimeSpan : TimeSpan.FromSeconds(0);
             totalTime.Text = string.Format(
-                 "{0}{1:00}:{2:00}:{3:00}", "总时长：",
+                 "{0}{1:00}:{2:00}:{3:00}", "/",
                  duration.Hours,
                  duration.Minutes,
                  duration.Seconds);
