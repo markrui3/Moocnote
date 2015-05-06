@@ -154,23 +154,11 @@
                 Style="{StaticResource btnStyle}" Click="forwardBtn_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3" Width="450">
-                    <TextBlock Text="音量:" Foreground="Black" Margin="3" VerticalAlignment="Center"/>
-                    <Slider x:Name="volumeSlider" Minimum="0" VerticalAlignment="Center" Maximum="1" Value="0.5" Width="150" Margin="3"/>
-
-                    <Button x:Name="muteBtn" Content="静音" 
+                    <Button x:Name="muteBtn" Content="音量" 
                  Click="muteBtn_Click"/>
+                    <Slider x:Name="volumeSlider" Minimum="0" Style="{StaticResource VolSlider}" VerticalAlignment="Center" Maximum="1" Value="0.5" Width="80" Margin="3"/>
 
-                    <TextBlock Text="时间:" VerticalAlignment="Center"/>
-                    <TextBox Height="23" Name="textBox1" Width="30"/>
-                    <TextBlock Text="秒" VerticalAlignment="Center"/>
-
-                    <Button x:Name="skipBtn" Content="跳转" 
-                 Click="skipBtn_Click"/>
-                    <!--
- <telerik:RadButton Height="23" Name="radButton1" Width="45" Margin="10"  Click="radButton1_Click">跳转</telerik:RadButton>
-                <telerik:RadButton Height="23" Name="radButton2" Width="45" Click="radButton2_Click">截屏</telerik:RadButton>
-                <telerik:RadButton Height="23" Name="radButton3" Width="45" Margin="10" Click="radButton3_Click" >静音</telerik:RadButton>
-                -->
+                    
                 </StackPanel>
 
             </StackPanel>

@@ -303,18 +303,6 @@ namespace Moocnote
         private void pauseBtn_Click(object sender, RoutedEventArgs e)
         {
             mediaElement.Pause();
-            string a = mediaElement.Position.ToString();
-            string b = a.Substring(0, 8);//获取当前视频的时间
-            string[] videotime = b.Split(':');
-            int totime = int.Parse(videotime[0]) * 3600 + int.Parse(videotime[1]) * 60 + int.Parse(videotime[2]);
-            textBox1.Text = Convert.ToString(totime);
-            /*****************************
-            *进度时间设置6
-            *****************************/
-            //timer.Stop();
-            /*****************************
-            *进度时间设置6
-            *****************************/
         }
 
         /*
@@ -347,30 +335,6 @@ namespace Moocnote
         private void forwardBtn_Click(object sender, RoutedEventArgs e)
         {
             mediaElement.Position = mediaElement.Position + TimeSpan.FromSeconds(10);
-        }
-
-        /*
-         *  跳转到指定秒数播放视频
-         */
-        private void skipBtn_Click(object sender, RoutedEventArgs e)
-        {
-            string Current_Position = textBox1.Text;
-            if (Current_Position != "")
-            {
-                int current_time = int.Parse(Current_Position);
-                int hour = current_time / 3600;
-                int minutes = (current_time - (3600 * hour)) / 60;
-                int second = current_time - (3600 * hour) - (minutes * 60);
-                DateTime nows = DateTime.Now;
-                int year = nows.Year;
-                int month = nows.Month;
-                int day = nows.Day;
-                DateTime dt = new DateTime(year, month, day, hour, minutes, second);
-                DateTime dt2 = new DateTime(year, month, day, 0, 0, 0);
-                TimeSpan times = new TimeSpan((dt - dt2).Ticks);
-                mediaElement.Position = times;
-                mediaElement.Play();
-            }
         }
 
         private void muteBtn_Click(object sender, RoutedEventArgs e)
