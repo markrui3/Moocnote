@@ -134,7 +134,7 @@
 />
                 </Border>
 
-                <Slider Name="timelineSlider" Margin="5" Width="450" 
+                <Slider Name="timelineSlider"  Style="{StaticResource progressSlider}" Margin="5" Width="450" 
         HorizontalAlignment="Center"  ValueChanged="timelineSlider_ValueChanged" PreviewMouseUp="timelineSlider_PreviewMouseUp" />
 
                 <TextBlock Width="110" x:Name="txtTime"/>

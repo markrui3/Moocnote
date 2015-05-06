@@ -3,6 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="VideoWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\Shared.xaml" />
+
+                <ResourceDictionary  Source="Resources\Slider.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>
