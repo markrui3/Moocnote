@@ -32,6 +32,7 @@ namespace Moocnote
          */
         private TimeSpan duration;
         private DispatcherTimer timer = new DispatcherTimer();
+        private TimeSpan ts2 = new TimeSpan();
 
         //public Bitmap bmp = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);
 
@@ -56,7 +57,18 @@ namespace Moocnote
 
             mediaElement.MediaOpened += new RoutedEventHandler(mediaElement_MediaOpened);
             mediaElement.MediaEnded += new RoutedEventHandler(mediaElement_MediaEnded);
+            SetImageForMediaElement();
         }
+
+        //将录像的第一帧作为播放前MediaElement显示的录像截图
+        public void SetImageForMediaElement()
+        {
+            mediaElement.Play();
+            mediaElement.Pause();
+            mediaElement.Position = TimeSpan.Zero;
+        }
+        
+
 
         #region 选择视频文件对话框
         private void openBtn_Click(object sender, RoutedEventArgs e)
@@ -77,13 +89,12 @@ namespace Moocnote
                 return;
             }
             mediaElement.Source = new Uri(filepath, UriKind.Relative);
-            //playBtn.IsEnabled = true;
+            playBtn.IsEnabled = true;
 
 
             //timer.Tick += new EventHandler(timer_Tick);
             //openBtn.Click += playBtn_Click;
-            SetPlayer(true);
-            mediaElement.Play();
+           
 
             setNote_List();
 
@@ -216,8 +227,8 @@ namespace Moocnote
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            timelineSlider.ValueChanged += timelineSlider_ValueChanged2;
-            timelineSlider.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(timelineSlider_ValueChanged), true);
+            //timelineSlider.ValueChanged += timelineSlider_ValueChanged2;
+            //timelineSlider.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(timelineSlider_ValueChanged), true);
 
             //窗口设置
             this.WindowState = System.Windows.WindowState.Normal;
@@ -380,18 +391,19 @@ namespace Moocnote
         #endregion
 
         #region 播放进度，跳转到指定的某个地方timelineSlider_ValueChanged
-        private void timelineSlider_ValueChanged(object sender, MouseButtonEventArgs e)
+        private void timelineSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
           
-            int SliderValue = (int)timelineSlider.Value;
-            TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
-            mediaElement.Position = ts;
+            //int SliderValue = (int)timelineSlider.Value;
+            //TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
+            //mediaElement.Position = ts;
             //timelineSlider.ToolTip = mediaElement.Position.ToString().Substring(0, 8);
             //mediaElement.Play();
-        }
-        private void timelineSlider_ValueChanged2(object sender, RoutedEventArgs e)
-        {
 
+            //在鼠标拖动Thumb的过程中记录其值。
+            ts2 = TimeSpan.FromSeconds(e.NewValue);
+            string currentPosition = string.Format("{0:00}:{1:00}:{2:00}", (int)ts2.TotalHours, ts2.Minutes, ts2.Seconds);
+            txtTime.Text = currentPosition;
             //视频跳到有笔记的一点时，笔记变红，可以修改
             String videoTime = mediaElement.Position.ToString().Substring(0, 8);
             if (dic.Keys.Contains(videoTime))
@@ -414,6 +426,41 @@ namespace Moocnote
                     }
                 }
             }
+        }
+        private void timelineSlider_ValueChanged2(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //在鼠标拖动Thumb的过程中记录其值。
+            ts2 = TimeSpan.FromSeconds(e.NewValue);
+            string currentPosition = string.Format("{0:00}:{1:00}:{2:00}", (int)ts2.TotalHours, ts2.Minutes, ts2.Seconds);
+            txtTime.Text = currentPosition;
+            //视频跳到有笔记的一点时，笔记变红，可以修改
+            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
+            if (dic.Keys.Contains(videoTime))
+            {
+                assist.Text = dic[videoTime].Keys.ElementAt(0);
+                assist2.Text = dic[videoTime].Values.ElementAt(0);
+                checkedNote.Text = dic[videoTime].Values.ElementAt(0);
+                deleteBtn.IsEnabled = true;
+                canupdateBtn.IsEnabled = true;
+
+                foreach (StackPanel notepanel in noteItem.Items)
+                {
+                    if (notepanel.Uid == dic[videoTime].Keys.ElementAt(0))
+                    {
+                        notepanel.Background = System.Windows.Media.Brushes.Red;
+                    }
+                    else
+                    {
+                        notepanel.Background = System.Windows.Media.Brushes.White;
+                    }
+                }
+            }
+        }
+
+        //当拖动Thumb的鼠标放开时，从指定时间开始播放
+        private void timelineSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            mediaElement.Position = ts2;
         }
         #endregion
 
@@ -549,6 +596,33 @@ namespace Moocnote
             }
         }
         #endregion
+
+
+        private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 23;
+        }
+
+        private void Image_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 20;
+        }
+
+        private void playImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 28;
+        }
+
+        private void playImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 25;
+        }
+
     }
+
 
 }

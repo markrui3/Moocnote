@@ -5,12 +5,74 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     Title="VideoWindow" Width="900" Height="550" WindowStartupLocation="CenterScreen">
-    <Viewbox>
+    <Window.Resources>
+        <!-- 此为圆形按钮 -->
+        <Style x:Key="playButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮呈圆形-->
+                            <Ellipse x:Name="outerCircle"   Width="28" Height="28">
+                            </Ellipse>
+                            <!--按钮内容-->
+                            <Border Name="border"  >
+                                <Image  Name="playImage" Height="25" Source="/Images/play.png" MouseEnter="playImage_MouseEnter" MouseLeave="playImage_MouseLeave"></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="pauseButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮呈圆形-->
+                            <Ellipse x:Name="outerCircle" Width="28" Height="28">
+                            </Ellipse>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Height="20" Source="/Images/pause.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="stopButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮呈圆形-->
+                            <Ellipse x:Name="outerCircle" Width="28" Height="28">
+                            </Ellipse>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Height="20" Source="/Images/stop.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <UserControl >
         <Grid>
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width=" 500"></ColumnDefinition>
                 <ColumnDefinition Width="400"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            
             <Grid.Resources>
                 <Style x:Key="btnStyle" TargetType="Button">
                     <Setter Property="Background">
@@ -54,6 +116,10 @@
                     <Setter Property="BorderThickness" Value="1" />
                     <Setter Property="BorderBrush" Value="#FF66C9C4" />
                 </Style>
+
+
+              
+
             </Grid.Resources>
             <StackPanel HorizontalAlignment="Center" Margin="20">
                 <Border BorderThickness="3" Background="Black">
@@ -69,19 +135,16 @@
                 </Border>
 
                 <Slider Name="timelineSlider" Margin="5" Width="450" 
-        HorizontalAlignment="Center" />
+        HorizontalAlignment="Center"  ValueChanged="timelineSlider_ValueChanged" PreviewMouseUp="timelineSlider_PreviewMouseUp" />
 
                 <TextBlock Width="110" x:Name="txtTime"/>
                 <TextBlock Width="96" x:Name="totalTime" />
                 <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
                     <Button x:Name="openBtn" Content="选择视频" 
                 Style="{StaticResource btnStyle}" Click="openBtn_Click"/>
-                    <Button x:Name="playBtn" Content="播放" 
-                Style="{StaticResource btnStyle}" Click="playBtn_Click"/>
-                    <Button x:Name="pauseBtn" Content="暂停" 
-                Style="{StaticResource btnStyle}" Click="pauseBtn_Click"/>
-                    <Button x:Name="stopBtn" Content="停止" 
-                Style="{StaticResource btnStyle}" Click="stopBtn_Click"/>
+                    <Button x:Name="stopBtn" Cursor="Hand" Style="{StaticResource stopButtonTemplate}" ToolTip="停止播放" Click="stopBtn_Click"/>
+                    <Button x:Name="playBtn" Cursor="Hand" Style="{StaticResource playButtonTemplate}" ToolTip="播放" Click="playBtn_Click" />
+                    <Button x:Name="pauseBtn" Cursor="Hand" Style="{StaticResource pauseButtonTemplate}" ToolTip="暂停" Click="pauseBtn_Click"/>
                     <Button x:Name="backBtn" Content="后退" 
                 Style="{StaticResource btnStyle}" Click="backBtn_Click"/>
                     <Button x:Name="forwardBtn" Content="前进" 
@@ -163,5 +226,5 @@
             </StackPanel>
 
         </Grid>
-    </Viewbox>
+    </UserControl>
 </Window>
