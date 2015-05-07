@@ -155,6 +155,12 @@
     <Resource Include="Images\volume.png" />
     <Resource Include="Images\volume1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\forward.png" />
+    <Resource Include="Images\unvoiced.png" />
+    <Resource Include="Images\voiced.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

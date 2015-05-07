@@ -337,19 +337,31 @@ namespace Moocnote
             mediaElement.Position = mediaElement.Position + TimeSpan.FromSeconds(10);
         }
 
-        private void muteBtn_Click(object sender, RoutedEventArgs e)
+        //private void muteBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    // IsMuted - 是否静音
+        //    if (mediaElement.IsMuted == true)
+        //    {
+               
+        //        Uri uri = new Uri("Images/back.png", UriKind.Relative);
+        //        BitmapImage bimg = new BitmapImage(uri);
+        //        muteBtn.Background = new ImageBrush(bimg);
+        //        //muteBtn.Content = "静音";
+        //        mediaElement.IsMuted = false;
+        //    }
+        //    else
+        //    {
+        //        muteBtn.Content = "有声";
+        //        mediaElement.IsMuted = true;
+        //    }
+        //}
+
+        private void muteImage_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            // IsMuted - 是否静音
-            if (mediaElement.IsMuted == true)
-            {
-                muteBtn.Content = "静音";
-                mediaElement.IsMuted = false;
-            }
-            else
-            {
-                muteBtn.Content = "有声";
-                mediaElement.IsMuted = true;
-            }
+
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            Uri uri = new Uri(@"Images/pause.png");
+            image.Source = new BitmapImage(uri);
         }
 
         #endregion

@@ -65,7 +65,64 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="backButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮呈圆形-->
+                            <Ellipse x:Name="outerCircle" Width="28" Height="28"/>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Height="20" Source="/Images/back.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="forwardButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮呈圆形-->
+                            <Ellipse x:Name="outerCircle" Width="28" Height="28"/>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Height="20" Source="/Images/forward.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="muteButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Height="20" Source="/Images/voiced.png" MouseUp="muteImage_MouseUp" ></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
+    
     <Viewbox  >
         <Grid>
             <Grid.ColumnDefinitions >
@@ -148,14 +205,12 @@
                     <Button x:Name="stopBtn" Cursor="Hand" Style="{StaticResource stopButtonTemplate}" ToolTip="停止播放" Click="stopBtn_Click"/>
                     <Button x:Name="playBtn" Cursor="Hand" Style="{StaticResource playButtonTemplate}" ToolTip="播放" Click="playBtn_Click" />
                     <Button x:Name="pauseBtn" Cursor="Hand" Style="{StaticResource pauseButtonTemplate}" ToolTip="暂停" Click="pauseBtn_Click"/>
-                    <Button x:Name="backBtn" Content="后退" 
-                Style="{StaticResource btnStyle}" Click="backBtn_Click"/>
-                    <Button x:Name="forwardBtn" Content="前进" 
-                Style="{StaticResource btnStyle}" Click="forwardBtn_Click"/>
+                    <Button x:Name="backBtn"  Cursor="Hand" Style="{StaticResource backButtonTemplate}" ToolTip="后退"  Click="backBtn_Click" />
+                    <Button x:Name="forwardBtn"  Cursor="Hand" Style="{StaticResource forwardButtonTemplate}" ToolTip="快进"  Click="forwardBtn_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3" Width="450">
-                    <Button x:Name="muteBtn" Content="音量" 
-                 Click="muteBtn_Click"/>
+                    <Button x:Name="muteBtn"  Cursor="Hand"  ToolTip="对扬声器设置静音"   Style="{StaticResource muteButtonTemplate}"
+                 />
                     <Slider x:Name="volumeSlider" Minimum="0" Style="{StaticResource VolSlider}" VerticalAlignment="Center" Maximum="1" Value="0.5" Width="80" Margin="3"/>
 
                     
