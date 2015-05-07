@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using Moocnote.Utils;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Reflection;
 
 
 namespace Moocnote
@@ -304,10 +305,28 @@ namespace Moocnote
         {
             mediaElement.Pause();
         }
+        private MediaState GetMediaState(MediaElement myMedia)
+        {
+            FieldInfo hlp = typeof(MediaElement).GetField("_helper", BindingFlags.NonPublic | BindingFlags.Instance);
+            object helperObject = hlp.GetValue(myMedia);
+            FieldInfo stateField = helperObject.GetType().GetField("_currentState", BindingFlags.NonPublic | BindingFlags.Instance);
+            MediaState state = (MediaState)stateField.GetValue(helperObject);
+            return state;
+        }
 
         private void playImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (mediaElement.Clock.CurrentState == System.Windows.Media.Animation.ClockState.Stopped)
+            MediaState state = this.GetMediaState(mediaElement);
+            Console.WriteLine("点击按钮之前的状态：" + state);
+            if (state == MediaState.Play)
+            {
+                mediaElement.Pause();
+                System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+                Uri uri = new Uri("Images/play.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+                playBtn.ToolTip = "播放";
+            }
+            else
             {
                 SetPlayer(true);
                 mediaElement.Play();
@@ -315,14 +334,6 @@ namespace Moocnote
                 Uri uri = new Uri("Images/pause.png", UriKind.Relative);
                 image.Source = new BitmapImage(uri);
                 playBtn.ToolTip = "暂停";
-            }
-            else
-            {
-                mediaElement.Pause();
-                System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-                Uri uri = new Uri("Images/play.png", UriKind.Relative);
-                image.Source = new BitmapImage(uri);
-                playBtn.ToolTip = "播放";
             }
         }
 
