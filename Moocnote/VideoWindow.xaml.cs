@@ -264,7 +264,7 @@ namespace Moocnote
         private void SetPlayer(bool bVal)
         {
             playBtn.IsEnabled = bVal;
-            pauseBtn.IsEnabled = bVal;
+            //pauseBtn.IsEnabled = bVal;
             stopBtn.IsEnabled = bVal;
             backBtn.IsEnabled = bVal;
             forwardBtn.IsEnabled = bVal;
@@ -305,6 +305,28 @@ namespace Moocnote
             mediaElement.Pause();
         }
 
+        private void playImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (mediaElement.Clock.CurrentState == System.Windows.Media.Animation.ClockState.Stopped)
+            {
+                SetPlayer(true);
+                mediaElement.Play();
+                System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+                Uri uri = new Uri("Images/pause.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+                playBtn.ToolTip = "暂停";
+            }
+            else
+            {
+                mediaElement.Pause();
+                System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+                Uri uri = new Uri("Images/play.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+                playBtn.ToolTip = "播放";
+            }
+        }
+
+
         /*
          * 停止播放视频
          */
@@ -342,7 +364,7 @@ namespace Moocnote
         //    // IsMuted - 是否静音
         //    if (mediaElement.IsMuted == true)
         //    {
-               
+
         //        Uri uri = new Uri("Images/back.png", UriKind.Relative);
         //        BitmapImage bimg = new BitmapImage(uri);
         //        muteBtn.Background = new ImageBrush(bimg);
@@ -356,12 +378,49 @@ namespace Moocnote
         //    }
         //}
 
-        private void muteImage_MouseUp(object sender, MouseButtonEventArgs e)
+        private void muteImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // IsMuted - 是否静音
+            if (mediaElement.IsMuted == true)
+            {
+                System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+                Uri uri = new Uri("Images/voiced.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+                mediaElement.IsMuted = false;
+                muteBtn.ToolTip = "对扬声器设置静音";
+            }
+            else
+            {
+                System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+                Uri uri = new Uri("Images/unvoiced.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+                mediaElement.IsMuted = true;
+                muteBtn.ToolTip = "对扬声器取消静音";
+            }
+        }
 
+        private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
             System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            Uri uri = new Uri(@"Images/pause.png");
-            image.Source = new BitmapImage(uri);
+            image.Height = 23;
+        }
+
+        private void Image_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 20;
+        }
+
+        private void playImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 28;
+        }
+
+        private void playImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 25;
         }
 
         #endregion
@@ -453,6 +512,7 @@ namespace Moocnote
                  duration.Seconds);
 
             SetupTimer();
+            
         }
 
         private void SetupTimer()
@@ -573,30 +633,6 @@ namespace Moocnote
         }
         #endregion
 
-
-        private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            image.Height = 23;
-        }
-
-        private void Image_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            image.Height = 20;
-        }
-
-        private void playImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            image.Height = 28;
-        }
-
-        private void playImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            image.Height = 25;
-        }
 
     }
 

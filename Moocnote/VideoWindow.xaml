@@ -19,7 +19,7 @@
                             </Ellipse>
                             <!--按钮内容-->
                             <Border Name="border"  >
-                                <Image  Name="playImage" Height="25" Source="/Images/play.png" MouseEnter="playImage_MouseEnter" MouseLeave="playImage_MouseLeave"></Image>
+                                <Image  Name="playImage" Height="25" Source="/Images/play.png" MouseEnter="playImage_MouseEnter" MouseLeave="playImage_MouseLeave" MouseDown=" playImage_MouseDown"></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -113,7 +113,24 @@
                         <Grid>
                             <!--按钮内容-->
                             <Border>
-                                <Image Height="20" Source="/Images/voiced.png" MouseUp="muteImage_MouseUp" ></Image>
+                                <Image Height="20" Source="/Images/voiced.png" MouseDown="muteImage_MouseDown" ></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="openButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Height="25" Source="/Images/open.png" ></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -200,12 +217,15 @@
                 
                 
                 <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
-                    <Button x:Name="openBtn" Content="选择视频" 
-                Style="{StaticResource btnStyle}" Click="openBtn_Click"/>
+                    <Button x:Name="openBtn"  Cursor="Hand" Style="{StaticResource openButtonTemplate}" ToolTip="选择本地文件"
+                 Click="openBtn_Click">
+                        
+                    </Button>
                     <Button x:Name="stopBtn" Cursor="Hand" Style="{StaticResource stopButtonTemplate}" ToolTip="停止播放" Click="stopBtn_Click"/>
-                    <Button x:Name="playBtn" Cursor="Hand" Style="{StaticResource playButtonTemplate}" ToolTip="播放" Click="playBtn_Click" />
-                    <Button x:Name="pauseBtn" Cursor="Hand" Style="{StaticResource pauseButtonTemplate}" ToolTip="暂停" Click="pauseBtn_Click"/>
                     <Button x:Name="backBtn"  Cursor="Hand" Style="{StaticResource backButtonTemplate}" ToolTip="后退"  Click="backBtn_Click" />
+                    <Button x:Name="playBtn" Cursor="Hand" Style="{StaticResource playButtonTemplate}" ToolTip="播放"/>
+                    
+                    
                     <Button x:Name="forwardBtn"  Cursor="Hand" Style="{StaticResource forwardButtonTemplate}" ToolTip="快进"  Click="forwardBtn_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3" Width="450">
