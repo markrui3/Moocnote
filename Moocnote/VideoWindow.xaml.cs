@@ -326,7 +326,7 @@ namespace Moocnote
                 image.Source = new BitmapImage(uri);
                 playBtn.ToolTip = "播放";
             }
-            else
+            else if (state == MediaState.Pause || state == MediaState.Stop)
             {
                 SetPlayer(true);
                 mediaElement.Play();
@@ -335,6 +335,7 @@ namespace Moocnote
                 image.Source = new BitmapImage(uri);
                 playBtn.ToolTip = "暂停";
             }
+            
         }
 
 
@@ -351,6 +352,12 @@ namespace Moocnote
             *****************************/
             timer.Stop();
             timelineSlider.Value = 0;
+
+            System.Windows.Controls.Image i = (System.Windows.Controls.Image)playBtn.Template.FindName("playImage", playBtn);
+            Uri uri = new Uri("Images/play.png", UriKind.Relative);
+            i.Source = new BitmapImage(uri);
+            playBtn.ToolTip = "播放";
+           
             /*****************************
             *进度时间设置5
             *****************************/
@@ -413,27 +420,39 @@ namespace Moocnote
         private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            image.Height = 23;
+            image.Height = 33;
         }
 
         private void Image_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            image.Height = 20;
+            image.Height = 30;
         }
 
         private void playImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            image.Height = 28;
+            image.Height = 41;
         }
 
         private void playImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
-            image.Height = 25;
+            image.Height = 38;
         }
 
+
+        private void openImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 26;
+        }
+
+        private void openImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            image.Height = 25;
+        }
         #endregion
 
         #region 播放进度，跳转到指定的某个地方timelineSlider_ValueChanged
@@ -541,6 +560,12 @@ namespace Moocnote
         {
             mediaElement.Stop();
             timelineSlider.Value = 0;
+
+            System.Windows.Controls.Image i = (System.Windows.Controls.Image)playBtn.Template.FindName("playImage", playBtn);
+            Uri uri = new Uri("Images/play.png", UriKind.Relative);
+            i.Source = new BitmapImage(uri);
+            playBtn.ToolTip = "播放";
+
         }
 
         #region 笔记操作的各种按钮
