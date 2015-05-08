@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     Title="VideoWindow" Width="900" Height="550" WindowStartupLocation="CenterScreen"
-         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}"    >
+         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}"  MouseDown="Window_MouseDown"  >
     <Window.Resources>
         <!-- 此为圆形按钮 -->
         <Style x:Key="playButtonTemplate" TargetType="Button" >
@@ -139,6 +139,56 @@
             </Setter>
         </Style>
 
+        <Style x:Key="minimizedButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Height="20" Source="/Images/minimized.png" ></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="maximizedButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Name="zoomImage" Height="20" Source="/Images/maximized.png" ></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="closeButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Height="20" Source="/Images/close.png" ></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     
     <Viewbox  >
@@ -242,11 +292,11 @@
 
             </StackPanel>
             
-            <StackPanel  Grid.Row="0 " Grid.Column=" 1" Margin="20,2,20,20">
+            <StackPanel  Grid.Row="0 " Grid.Column=" 1" Margin="20,4,20,20">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <Button>最小化</Button>
-                        <Button>缩放</Button>
-                        <Button>关闭</Button>
+                        <Button Name="minimizedBtn" ToolTip="最小化"   Style="{StaticResource minimizedButtonTemplate}" Click ="minimizedBtn_Click">最小化</Button>
+                        <Button Name="maximizedBtn" ToolTip="最大化"   Style="{StaticResource maximizedButtonTemplate}" Click ="maximizedBtn_Click">缩放</Button>
+                        <Button Name="closeBtn" ToolTip="关闭"   Style="{StaticResource closeButtonTemplate}" Click ="closeBtn_Click">关闭</Button>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,15,0,0" >

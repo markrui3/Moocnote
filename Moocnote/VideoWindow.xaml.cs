@@ -233,8 +233,13 @@ namespace Moocnote
 
             //窗口设置
             this.WindowState = System.Windows.WindowState.Normal;
-            this.WindowStyle = System.Windows.WindowStyle.SingleBorderWindow;
-            this.ResizeMode = System.Windows.ResizeMode.CanResize;
+            this.WindowStyle = System.Windows.WindowStyle.None;
+            this.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
+
+            Rect rect = SystemParameters.WorkArea;
+            this.MaxWidth = rect.Width + 14;
+            this.MaxHeight = rect.Height + 6;
+            
             //this.Left = 0.0.; this.Top = 0.0;
             //this.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
             //this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
@@ -669,6 +674,50 @@ namespace Moocnote
         }
         #endregion
 
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void minimizedBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+                this.WindowState = WindowState.Minimized;
+            
+            
+        }
+
+        private void maximizedBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+                System.Windows.Controls.Image i = (System.Windows.Controls.Image)maximizedBtn.Template.FindName("zoomImage", maximizedBtn);
+                Uri uri = new Uri("Images/maximized.png", UriKind.Relative);
+                i.Source = new BitmapImage(uri);
+                maximizedBtn.ToolTip = "最大化";
+
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+                System.Windows.Controls.Image i = (System.Windows.Controls.Image)maximizedBtn.Template.FindName("zoomImage", maximizedBtn);
+                Uri uri = new Uri("Images/diminish.png", UriKind.Relative);
+                i.Source = new BitmapImage(uri);
+                maximizedBtn.ToolTip = "向下还原";
+                
+            } 
+          
+        }
+
+        private void closeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
     }
 
