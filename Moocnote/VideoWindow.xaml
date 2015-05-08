@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-    Title="VideoWindow" Width="900" Height="550" WindowStartupLocation="CenterScreen">
+    Title="VideoWindow" Width="900" Height="550" WindowStartupLocation="CenterScreen"
+         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}"    >
     <Window.Resources>
         <!-- 此为圆形按钮 -->
         <Style x:Key="playButtonTemplate" TargetType="Button" >
@@ -19,7 +20,7 @@
                             </Ellipse>
                             <!--按钮内容-->
                             <Border Name="border"  >
-                                <Image  Name="playImage" Height="25" Source="/Images/play.png" MouseEnter="playImage_MouseEnter" MouseLeave="playImage_MouseLeave" MouseDown=" playImage_MouseDown"></Image>
+                                <Image  Name="playImage" Height="38" Source="/Images/play.png" MouseEnter="playImage_MouseEnter" MouseLeave="playImage_MouseLeave" MouseDown=" playImage_MouseDown"></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -58,7 +59,7 @@
                             </Ellipse>
                             <!--按钮内容-->
                             <Border>
-                                <Image Height="20" Source="/Images/stop.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
+                                <Image Height="30" Source="/Images/stop.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -77,7 +78,7 @@
                             <Ellipse x:Name="outerCircle" Width="28" Height="28"/>
                             <!--按钮内容-->
                             <Border>
-                                <Image Height="20" Source="/Images/back.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
+                                <Image Height="30" Source="/Images/back.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -96,7 +97,7 @@
                             <Ellipse x:Name="outerCircle" Width="28" Height="28"/>
                             <!--按钮内容-->
                             <Border>
-                                <Image Height="20" Source="/Images/forward.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
+                                <Image Height="30" Source="/Images/forward.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -130,7 +131,7 @@
                         <Grid>
                             <!--按钮内容-->
                             <Border>
-                                <Image Height="25" Source="/Images/open.png" ></Image>
+                                <Image Height="25" Source="/Images/open.png"  MouseEnter="openImage_MouseEnter" MouseLeave="openImage_MouseLeave"></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -141,7 +142,9 @@
     </Window.Resources>
     
     <Viewbox  >
-        <Grid>
+        <Border CornerRadius=" 8,8,8,8" Height="Auto" Background="#FF9395F0" >
+            <Grid Height=" 550"  >
+           
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width=" 500"></ColumnDefinition>
                 <ColumnDefinition Width="400"></ColumnDefinition>
@@ -186,16 +189,14 @@
                     </Style.Triggers>
                 </Style>
 
-                <Style x:Key="notCalledBorder" TargetType="{x:Type Border}">
-                    <Setter Property="BorderThickness" Value="1" />
-                    <Setter Property="BorderBrush" Value="#FF66C9C4" />
-                </Style>
-
-
-              
-
-            </Grid.Resources>
-            <StackPanel HorizontalAlignment="Center" Margin="20">
+                    <Style x:Key="notCalledBorder" TargetType="{x:Type Border}">
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="BorderBrush" Value="#FF66C9C4" />
+                    </Style>
+                </Grid.Resources>
+                
+                
+            <StackPanel HorizontalAlignment="Center" Margin="20,40,20,20">
                 <Border BorderThickness="3" Background="Black">
                     <Border.BorderBrush>
                         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -208,7 +209,7 @@
 />
                 </Border>
 
-                <Slider Name="timelineSlider"  Style="{StaticResource progressSlider}" Margin="5" Width="450" 
+                <Slider Name="timelineSlider" Cursor="Hand" Style="{StaticResource progressSlider}"  Width="450" 
         HorizontalAlignment="Center"  ValueChanged="timelineSlider_ValueChanged" PreviewMouseUp="timelineSlider_PreviewMouseUp" />
                 <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
                     <TextBlock Width="47" x:Name="txtTime"  Foreground="Gray"/>
@@ -216,36 +217,44 @@
                 </StackPanel>
                 
                 
-                <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
-                    <Button x:Name="openBtn"  Cursor="Hand" Style="{StaticResource openButtonTemplate}" ToolTip="选择本地文件"
-                 Click="openBtn_Click">
-                        
-                    </Button>
-                    <Button x:Name="stopBtn" Cursor="Hand" Style="{StaticResource stopButtonTemplate}" ToolTip="停止播放" Click="stopBtn_Click"/>
-                    <Button x:Name="backBtn"  Cursor="Hand" Style="{StaticResource backButtonTemplate}" ToolTip="后退"  Click="backBtn_Click" />
-                    <Button x:Name="playBtn" Cursor="Hand" Style="{StaticResource playButtonTemplate}" ToolTip="播放"/>
-                    
-                    
-                    <Button x:Name="forwardBtn"  Cursor="Hand" Style="{StaticResource forwardButtonTemplate}" ToolTip="快进"  Click="forwardBtn_Click"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3" Width="450">
-                    <Button x:Name="muteBtn"  Cursor="Hand"  ToolTip="对扬声器设置静音"   Style="{StaticResource muteButtonTemplate}"
-                 />
-                    <Slider x:Name="volumeSlider" Minimum="0" Style="{StaticResource VolSlider}" VerticalAlignment="Center" Maximum="1" Value="0.5" Width="80" Margin="3"/>
+                <StackPanel Orientation="Horizontal" Height="42" HorizontalAlignment="Right"  >
+                    <Button x:Name="openBtn" Width=" 100" Cursor="Hand" Style="{StaticResource openButtonTemplate}" ToolTip="选择本地文件"
+                 Click="openBtn_Click" HorizontalAlignment="Left" />
+                    <Button x:Name="stopBtn" Width=" 40" Cursor="Hand" Style="{StaticResource stopButtonTemplate}" ToolTip="停止播放" Click="stopBtn_Click" Margin="0"/>
+                    <StackPanel Orientation="Horizontal" Height="42" HorizontalAlignment="Center" >
+                        <Button x:Name="backBtn" Width=" 50" Cursor="Hand" Style="{StaticResource backButtonTemplate}" ToolTip="后退"  Click="backBtn_Click" Margin="0" />
+                        <Button x:Name="playBtn" Width=" 50" Cursor="Hand" Style="{StaticResource playButtonTemplate}" ToolTip="播放" Margin="0"/>
+                        <Button x:Name="forwardBtn" Width=" 50"  Cursor="Hand" Style="{StaticResource forwardButtonTemplate}" ToolTip="快进"  Click="forwardBtn_Click" Margin="0"/>
+                    </StackPanel>
 
-                    
+                    <StackPanel Orientation="Horizontal" Margin="15,0,28,0" >
+                        <Button x:Name="muteBtn"  Cursor="Hand"  ToolTip="对扬声器设置静音"   Style="{StaticResource muteButtonTemplate}" />
+                        <Slider x:Name="volumeSlider" Cursor="Hand"      Minimum="0" Style="{StaticResource VolSlider}" VerticalAlignment="Center" Maximum="1" Value="0.5" Width="80" Margin="3"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <TextBox x:Name="noteTxt" Height="50" Width=" 400"  TextWrapping="Wrap"  Text="hai" Margin="0,20,1,0" />
+
+                <StackPanel Width=" 400">
+                    <Button x:Name="saveBtn" Height=" 25" Width=" 40" Content="保存" Click="saveBtn_Click" HorizontalAlignment="Right" />
                 </StackPanel>
 
             </StackPanel>
-            <StackPanel  Grid.Row="0 " Grid.Column=" 1" Margin="20,8,20,20">
+            
+            <StackPanel  Grid.Row="0 " Grid.Column=" 1" Margin="20,2,20,20">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <Button>最小化</Button>
+                        <Button>缩放</Button>
+                        <Button>关闭</Button>
+                    </StackPanel>
 
-                <Border Style="{StaticResource notCalledBorder}" >
-                    <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0" >
                         <TextBlock Width=" 60" Margin="10,0,0,0">时间</TextBlock>
                         <TextBlock Width=" 180">笔记</TextBlock>
                         <TextBlock Width=" 95">日期</TextBlock>
                     </StackPanel>
-                </Border >
+               
                 <Border Style="{StaticResource notCalledBorder}" >
                     
                     
@@ -279,18 +288,12 @@
 
                 <TextBlock x:Name="assist" Visibility="Collapsed" />
                 <TextBlock x:Name="assist2" Visibility="Collapsed" />
-                <Border Style="{StaticResource notCalledBorder}" >
-                        <TextBox x:Name="noteTxt" Height="86"  TextWrapping="Wrap"  Text="hai" Margin="0,0,1,0" />
-               </Border> 
-                <StackPanel >
-                    <Button x:Name="saveBtn" Height=" 25" Width=" 40" Content="保存" Click="saveBtn_Click" HorizontalAlignment="Right" />
-                </StackPanel>
-
-
-
-
+                
+                        
             </StackPanel>
+            
 
         </Grid>
+        </Border>
     </Viewbox>
 </Window>
