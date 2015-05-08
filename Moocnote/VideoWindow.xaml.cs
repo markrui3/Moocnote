@@ -719,6 +719,79 @@ namespace Moocnote
             this.Close();
         }
 
+        private void zoomImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            if (this.WindowState == WindowState.Maximized)
+            {
+
+                Uri uri = new Uri("Images/diminishPressed.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+               
+
+            }
+            else
+            {
+                Uri uri = new Uri("Images/maximizedPressed.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+            } 
+            
+        }
+
+        private void zoomImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+            if (this.WindowState == WindowState.Maximized)
+            {
+
+                Uri uri = new Uri("Images/diminish.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+
+
+            }
+            else
+            {
+                Uri uri = new Uri("Images/maximized.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+            } 
+            
+        }
+
+
+        private void closeImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+ 
+                Uri uri = new Uri("Images/closePressed.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+        }
+
+        private void closeImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+           
+
+                Uri uri = new Uri("Images/close.png", UriKind.Relative);
+                image.Source = new BitmapImage(uri);
+        }
+
+        private void minimizedImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+
+            Uri uri = new Uri("Images/minimizedPressed.png", UriKind.Relative);
+            image.Source = new BitmapImage(uri);
+        }
+
+        private void minimizedImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+
+
+            Uri uri = new Uri("Images/minimized.png", UriKind.Relative);
+            image.Source = new BitmapImage(uri);
+        }
+
     }
 
 

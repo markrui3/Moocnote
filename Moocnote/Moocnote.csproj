@@ -178,6 +178,14 @@
   <ItemGroup>
     <Resource Include="Images\minimized.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\diminishPressed.png" />
+    <Resource Include="Images\maximizedPressed.png" />
+    <Resource Include="Images\minimizedPressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\closePressed.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

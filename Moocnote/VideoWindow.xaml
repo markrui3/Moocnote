@@ -148,7 +148,7 @@
                         <Grid>
                             <!--按钮内容-->
                             <Border>
-                                <Image Height="20" Source="/Images/minimized.png" ></Image>
+                                <Image Name="minimizedImage" Height="25" Source="/Images/minimized.png" MouseEnter="minimizedImage_MouseEnter" MouseLeave="minimizedImage_MouseLeave"></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -165,7 +165,7 @@
                         <Grid>
                             <!--按钮内容-->
                             <Border>
-                                <Image Name="zoomImage" Height="20" Source="/Images/maximized.png" ></Image>
+                                <Image Name="zoomImage" Height="25" Source="/Images/maximized.png" MouseEnter="zoomImage_MouseEnter" MouseLeave="zoomImage_MouseLeave"></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -182,12 +182,13 @@
                         <Grid>
                             <!--按钮内容-->
                             <Border>
-                                <Image Height="20" Source="/Images/close.png" ></Image>
+                                <Image Height="25" Source="/Images/close.png" MouseEnter="closeImage_MouseEnter" MouseLeave="closeImage_MouseLeave" ></Image>
                             </Border>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
         </Style>
     </Window.Resources>
     
@@ -294,9 +295,9 @@
             
             <StackPanel  Grid.Row="0 " Grid.Column=" 1" Margin="20,4,20,20">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <Button Name="minimizedBtn" ToolTip="最小化"   Style="{StaticResource minimizedButtonTemplate}" Click ="minimizedBtn_Click">最小化</Button>
-                        <Button Name="maximizedBtn" ToolTip="最大化"   Style="{StaticResource maximizedButtonTemplate}" Click ="maximizedBtn_Click">缩放</Button>
-                        <Button Name="closeBtn" ToolTip="关闭"   Style="{StaticResource closeButtonTemplate}" Click ="closeBtn_Click">关闭</Button>
+                        <Button Name="minimizedBtn" ToolTip="最小化"  Width=" 26" Style="{StaticResource minimizedButtonTemplate}" Click ="minimizedBtn_Click">最小化</Button>
+                        <Button Name="maximizedBtn" ToolTip="最大化" Width=" 26"   Style="{StaticResource maximizedButtonTemplate}" Click ="maximizedBtn_Click">缩放</Button>
+                        <Button Name="closeBtn" ToolTip="关闭" Background="Red" Width="26"  Style="{StaticResource closeButtonTemplate}" Click ="closeBtn_Click">关闭</Button>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,15,0,0" >
