@@ -142,6 +142,9 @@ namespace Moocnote
                         tb2.Text = note;
                         tb3.Text = reader.GetString(4);
 
+                        tb2.TextTrimming = TextTrimming.CharacterEllipsis;
+                        tb3.Margin =new Thickness(13,0,0,0);
+
                         if (dic.Keys.Contains(videoTime))
                         {
                             dic[videoTime].Add(id, note);
@@ -497,35 +500,7 @@ namespace Moocnote
                 }
             }
         }
-        private void timelineSlider_ValueChanged2(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            //在鼠标拖动Thumb的过程中记录其值。
-            ts2 = TimeSpan.FromSeconds(e.NewValue);
-            string currentPosition = string.Format("{0:00}:{1:00}:{2:00}", (int)ts2.TotalHours, ts2.Minutes, ts2.Seconds);
-            txtTime.Text = currentPosition;
-            //视频跳到有笔记的一点时，笔记变红，可以修改
-            String videoTime = mediaElement.Position.ToString().Substring(0, 8);
-            if (dic.Keys.Contains(videoTime))
-            {
-                assist.Text = dic[videoTime].Keys.ElementAt(0);
-                assist2.Text = dic[videoTime].Values.ElementAt(0);
-                checkedNote.Text = dic[videoTime].Values.ElementAt(0);
-                deleteBtn.IsEnabled = true;
-                canupdateBtn.IsEnabled = true;
-
-                foreach (StackPanel notepanel in noteItem.Items)
-                {
-                    if (notepanel.Uid == dic[videoTime].Keys.ElementAt(0))
-                    {
-                        notepanel.Background = System.Windows.Media.Brushes.Red;
-                    }
-                    else
-                    {
-                        notepanel.Background = System.Windows.Media.Brushes.White;
-                    }
-                }
-            }
-        }
+       
 
         //当拖动Thumb的鼠标放开时，从指定时间开始播放
         private void timelineSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -582,9 +557,12 @@ namespace Moocnote
                 String sqlfilepath = filepath.Replace("\\", "\\\\");
                 string a = mediaElement.Position.ToString();
                 string b = a.Substring(0, 8);//获取当前视频的时间
-                db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + ",'" + b + "'," + "'" + note + "'" + "," + "'" + System.DateTime.Now + "'" + ")");
+                //Console.WriteLine(System.DateTime.Now.ToString("MM-dd HH:mm"));
+                db.executeUpdate("insert into note values(id," + "'" + sqlfilepath + "'" + ",'" + b + "'," + "'" + note + "'" + "," + "'" + System.DateTime.Now.ToString("MM-dd HH:mm") + "'" + ")");
                 setNote_List();
             }
+            noteTxt.Text = "点击输入笔记";
+            noteTxt.Foreground = System.Windows.Media.Brushes.Gray;
         }
 
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
@@ -791,6 +769,43 @@ namespace Moocnote
             Uri uri = new Uri("Images/minimized.png", UriKind.Relative);
             image.Source = new BitmapImage(uri);
         }
+
+        private void saveImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+
+            Uri uri = new Uri("Images/savePressed.png", UriKind.Relative);
+            image.Source = new BitmapImage(uri);
+        }
+
+        private void saveImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            System.Windows.Controls.Image image = sender as System.Windows.Controls.Image;
+
+
+            Uri uri = new Uri("Images/save.png", UriKind.Relative);
+            image.Source = new BitmapImage(uri);
+        }
+
+        private void noteTxt_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (noteTxt.Text == "点击输入笔记")
+            {
+                noteTxt.Text = "";
+                noteTxt.Foreground = System.Windows.Media.Brushes.Black;
+            }
+        }
+
+        private void noteTxt_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (noteTxt.Text == "")
+            {
+                noteTxt.Text = "点击输入笔记";
+                noteTxt.Foreground = System.Windows.Media.Brushes.Gray;
+            }
+        }
+
+
 
     }
 

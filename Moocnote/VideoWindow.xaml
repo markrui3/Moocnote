@@ -188,7 +188,22 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
+        </Style>
+        <Style x:Key="saveButtonTemplate" TargetType="Button" >
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!--按钮内容-->
+                            <Border>
+                                <Image Name="saveImage" Height=" 24" Source="/Images/save.png" MouseEnter="saveImage_MouseEnter" MouseLeave="saveImage_MouseLeave"></Image>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
     
@@ -285,15 +300,15 @@
 
                 </StackPanel>
 
-                <TextBox x:Name="noteTxt" Height="50" Width=" 400"  TextWrapping="Wrap"  Text="hai" Margin="0,20,1,0" />
+                    <TextBox x:Name="noteTxt" Height="50" Width=" 400" Foreground="Gray"   TextWrapping="Wrap"  Text="点击输入笔记" Margin="0,20,1,0" GotFocus="noteTxt_GotFocus" LostFocus="noteTxt_LostFocus" />
 
                 <StackPanel Width=" 400">
-                    <Button x:Name="saveBtn" Height=" 25" Width=" 40" Content="保存" Click="saveBtn_Click" HorizontalAlignment="Right" />
+                        <Button x:Name="saveBtn" Style="{StaticResource saveButtonTemplate}" Content="保存" Click="saveBtn_Click" HorizontalAlignment="Right" />
                 </StackPanel>
 
             </StackPanel>
             
-            <StackPanel  Grid.Row="0 " Grid.Column=" 1" Margin="20,4,20,20">
+            <StackPanel  Grid.Row="0 " Grid.Column=" 1" Margin="20,0,20,20">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button Name="minimizedBtn" ToolTip="最小化"  Width=" 26" Style="{StaticResource minimizedButtonTemplate}" Click ="minimizedBtn_Click">最小化</Button>
                         <Button Name="maximizedBtn" ToolTip="最大化" Width=" 26"   Style="{StaticResource maximizedButtonTemplate}" Click ="maximizedBtn_Click">缩放</Button>
@@ -301,7 +316,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,15,0,0" >
-                        <TextBlock Width=" 60" Margin="10,0,0,0">时间</TextBlock>
+                        <TextBlock Width=" 60" Margin="10,0,0,0" >时间</TextBlock>
                         <TextBlock Width=" 180">笔记</TextBlock>
                         <TextBlock Width=" 95">日期</TextBlock>
                     </StackPanel>
