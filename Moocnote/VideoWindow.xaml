@@ -5,7 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     Title="VideoWindow" Width="900" Height="550" WindowStartupLocation="CenterScreen"
-         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}"  MouseDown="Window_MouseDown"  >
+         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" BorderThickness="7" MouseDown="Window_MouseDown"  >
+
+    <Window.Effect>
+        <DropShadowEffect ShadowDepth="1" BlurRadius="6" Direction="270" Opacity="0.75" Color="#FF211613"/>
+    </Window.Effect>
     <Window.Resources>
         <!-- 此为圆形按钮 -->
         <Style x:Key="playButtonTemplate" TargetType="Button" >
@@ -208,7 +212,8 @@
     </Window.Resources>
     
     <Viewbox  >
-        <Border CornerRadius=" 8,8,8,8" Height="Auto" Background="#FF9395F0" >
+        <Border CornerRadius=" 8,8,8,8" Height="Auto" Background="#FFD6DBE9">
+            
             <Grid Height=" 550"  >
            
             <Grid.ColumnDefinitions >
@@ -327,7 +332,7 @@
                     <ItemsControl x:Name="noteItem" Height="208" >
                     <ItemsControl.Template>
                         <ControlTemplate>
-                            <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Height=" 208">
+                                    <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Height=" 208" Style="{StaticResource for_scrollviewer}">
                                     <ItemsPresenter />
                                 </ScrollViewer>
                         </ControlTemplate>

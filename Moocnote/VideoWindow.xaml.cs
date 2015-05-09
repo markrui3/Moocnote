@@ -241,7 +241,7 @@ namespace Moocnote
 
             Rect rect = SystemParameters.WorkArea;
             this.MaxWidth = rect.Width + 14;
-            this.MaxHeight = rect.Height + 6;
+            this.MaxHeight = rect.Height + 14;
             
             //this.Left = 0.0.; this.Top = 0.0;
             //this.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
@@ -804,7 +804,6 @@ namespace Moocnote
                 noteTxt.Foreground = System.Windows.Media.Brushes.Gray;
             }
         }
-
 
 
     }

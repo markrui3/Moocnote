@@ -8,6 +8,7 @@
                 <ResourceDictionary Source="Resources\Shared.xaml" />
 
                 <ResourceDictionary  Source="Resources\Slider.xaml" />
+                <ResourceDictionary  Source="Resources\ScrollViewer.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
