@@ -261,8 +261,8 @@
                 </Style>
 
                     <Style x:Key="notCalledBorder" TargetType="{x:Type Border}">
-                        <Setter Property="BorderThickness" Value="1" />
-                        <Setter Property="BorderBrush" Value="#FF66C9C4" />
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="BorderBrush" Value="White"  />
                     </Style>
                 </Grid.Resources>
                 
@@ -319,45 +319,48 @@
                         <Button Name="maximizedBtn" ToolTip="最大化" Width=" 26"   Style="{StaticResource maximizedButtonTemplate}" Click ="maximizedBtn_Click">缩放</Button>
                         <Button Name="closeBtn" ToolTip="关闭" Background="Red" Width="26"  Style="{StaticResource closeButtonTemplate}" Click ="closeBtn_Click">关闭</Button>
                     </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0" >
-                        <TextBlock Width=" 60" Margin="10,0,0,0" >时间</TextBlock>
-                        <TextBlock Width=" 180">笔记</TextBlock>
-                        <TextBlock Width=" 95">日期</TextBlock>
+                    <StackPanel Height=" 15"></StackPanel>
+                    <Border Style="{StaticResource notCalledBorder}">
+                        <StackPanel Orientation="Horizontal" Height=" 26"  Background="#FF4D6082" >
+                        
+                            <TextBlock  VerticalAlignment="Center" Width=" 60" Margin="10,0,0,0" Foreground="White"  >时间</TextBlock>
+                        <TextBlock VerticalAlignment="Center" Width=" 215" Foreground="White">笔记</TextBlock>
+                        <TextBlock VerticalAlignment="Center" Width=" 75" Foreground="White">日期</TextBlock>
+                        
                     </StackPanel>
-               
-                <Border Style="{StaticResource notCalledBorder}" >
+</Border> 
+                    <Border Style="{StaticResource notCalledBorder}" Background="#FFF6F6F6">
                     
                     
-                    <ItemsControl x:Name="noteItem" Height="208" >
+                    <ItemsControl x:Name="noteItem" Height="258"   >
                     <ItemsControl.Template>
                         <ControlTemplate>
-                                    <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Height=" 208" Style="{StaticResource for_scrollviewer}">
+                                    <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Height=" 258" Style="{StaticResource for_scrollviewer}">
+                                        
                                     <ItemsPresenter />
                                 </ScrollViewer>
                         </ControlTemplate>
                     </ItemsControl.Template>
                         
                     </ItemsControl>
-                    
+
+                </Border>
 
 
-
-                </Border> 
-
-                <Border Style="{StaticResource notCalledBorder}">
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBox x:Name="checkedNote" Height="145" Width=" 327" IsReadOnly="True"></TextBox>
-                        <StackPanel >
-                            <Button x:Name="deleteBtn" Style="{StaticResource btnStyle2}" Content="删除" Click="deleteBtn_Click" HorizontalAlignment="Left"  />
-                            <Button x:Name="canupdateBtn" Style="{StaticResource btnStyle2}" Content="修改" Click="canupdateBtn_Click" HorizontalAlignment="Left"  />
-                            <Button x:Name="cancelBtn" Style="{StaticResource btnStyle2}" Content="取消" Click="cancelBtn_Click" HorizontalAlignment="Left"  />
-                            <Button x:Name="updateBtn" Style="{StaticResource btnStyle2}" Content="保存" Click="updateBtn_Click" HorizontalAlignment="Left"  />
-                        </StackPanel>
+                    <Border Style="{StaticResource notCalledBorder}"   >
+                        <StackPanel  >
+                            <TextBox x:Name="checkedNote" Height="145" IsReadOnly="True" Background="#FFF6F6F6"></TextBox>
+                        
                     </StackPanel>
                     </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <Button x:Name="deleteBtn" Style="{StaticResource btnStyle2}" Content="删除" Click="deleteBtn_Click" HorizontalAlignment="Left"  />
+                        <Button x:Name="canupdateBtn" Style="{StaticResource btnStyle2}" Content="修改" Click="canupdateBtn_Click" HorizontalAlignment="Left"  />
+                        <Button x:Name="cancelBtn" Style="{StaticResource btnStyle2}" Content="取消" Click="cancelBtn_Click" HorizontalAlignment="Left"  />
+                        <Button x:Name="updateBtn" Style="{StaticResource btnStyle2}" Content="保存" Click="updateBtn_Click" HorizontalAlignment="Left"  />
+                    </StackPanel>
 
-                <TextBlock x:Name="assist" Visibility="Collapsed" />
+                    <TextBlock x:Name="assist" Visibility="Collapsed" />
                 <TextBlock x:Name="assist2" Visibility="Collapsed" />
                 
                         

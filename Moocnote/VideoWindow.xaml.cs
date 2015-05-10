@@ -124,8 +124,8 @@ namespace Moocnote
                         TextBlock tb2 = new TextBlock();
                         TextBlock tb3 = new TextBlock();
                         tb1.Width = 60;
-                        tb2.Width = 180;
-                        tb3.Width = 95;
+                        tb2.Width = 200;
+                        tb3.Width = 75;
 
 
                         //int m = int.Parse(reader.GetString(2)) / 60000;
@@ -179,7 +179,8 @@ namespace Moocnote
         private void notePanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             StackPanel notepanel = (StackPanel)e.Source;
-            notepanel.Background = System.Windows.Media.Brushes.White;
+            //notepanel.Background = System.Windows.Media.Brushes.White;
+            notepanel.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFF6F6F6"));
         }
 
         private void notePanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -187,7 +188,8 @@ namespace Moocnote
             //TextBlock temp = (TextBlock)e.Source;
             //StackPanel notepanel = (StackPanel)temp.Parent;
             StackPanel notepanel = (StackPanel)e.Source;
-            notepanel.Background = System.Windows.Media.Brushes.Red;
+            //notepanel.Background = System.Windows.Media.Brushes.Red;
+            notepanel.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF3399FF"));
         }
 
         private void notePanel_MouseDown(object sender, MouseButtonEventArgs e)
@@ -491,11 +493,13 @@ namespace Moocnote
                 {
                     if (notepanel.Uid == dic[videoTime].Keys.ElementAt(0))
                     {
-                        notepanel.Background = System.Windows.Media.Brushes.Red;
+                        //notepanel.Background = System.Windows.Media.Brushes.Red;
+                        notepanel.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF3399FF"));
                     }
                     else
                     {
-                        notepanel.Background = System.Windows.Media.Brushes.White;
+                        //notepanel.Background = System.Windows.Media.Brushes.White;
+                        notepanel.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFF6F6F6"));
                     }
                 }
             }

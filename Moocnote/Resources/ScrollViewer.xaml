@@ -48,7 +48,7 @@
         <Setter Property="OverridesDefaultStyle"  
                     Value="true"/>
         <Setter Property="Background"  
-                    Value="Transparent"/>
+                    Value="#FFE8E8EC"/>
         <Setter Property="Focusable"  
                     Value="false"/>
         <Setter Property="IsTabStop"  
@@ -72,11 +72,10 @@
         <Setter Property="Stylus.IsFlicksEnabled"  
                     Value="false"/>
         <Setter Property="Background"  
-                    Value="Transparent"/>
+                    Value="#FFE8E8EC"/>
         <Setter Property="Margin"  
                     Value="0,1,1,6"/>
-        <Setter Property="Width"  
-                    Value="5"/>
+        
         <Setter Property="MinWidth"  
                     Value="5"/>
         <Setter Property="Opacity"  
@@ -175,7 +174,7 @@
                                     ContentTemplate="{TemplateBinding ContentTemplate}"/>
                             <ScrollBar x:Name="PART_VerticalScrollBar"  
                                            HorizontalAlignment="Right"  
-                                           Maximum="{TemplateBinding ScrollableHeight}"  
+                                           Maximum="{TemplateBinding ScrollableHeight}"  Width="13"
                                            Orientation="Vertical"  
                                            Style="{StaticResource for_scrollbar}"  
                                            ViewportSize="{TemplateBinding ViewportHeight}"  
