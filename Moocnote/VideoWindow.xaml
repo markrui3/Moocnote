@@ -349,7 +349,7 @@
 
                     <Border Style="{StaticResource notCalledBorder}"   >
                         <StackPanel  >
-                            <TextBox x:Name="checkedNote" Height="145" IsReadOnly="True" Background="#FFF6F6F6"></TextBox>
+                            <TextBox x:Name="checkedNote" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="145" IsReadOnly="True" Background="#FFF6F6F6"></TextBox>
                         
                     </StackPanel>
                     </Border>

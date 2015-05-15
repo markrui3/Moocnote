@@ -606,6 +606,11 @@ namespace Moocnote
             checkedNote.IsReadOnly = false;
             //canupdateBtn.Click += pauseBtn_Click;
             mediaElement.Pause();
+            System.Windows.Controls.Image i = (System.Windows.Controls.Image)playBtn.Template.FindName("playImage", playBtn);
+            Uri uri = new Uri("Images/play.png", UriKind.Relative);
+            i.Source = new BitmapImage(uri);
+            playBtn.ToolTip = "播放";
+ 
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
